@@ -190,25 +190,23 @@ export function RoundScorer({ session, game, players, existingScore, onComplete 
           </CardContent>
         </Card>
       ) : (
-        <Button variant="outline" onClick={() => setShowInput(true)} className="w-full">
+        <Button onClick={() => setShowInput(true)} className="w-full">
           <Plus className="h-4 w-4 mr-1" />
           Add Round
         </Button>
       )}
 
-      <div className="flex gap-2">
-        {rounds.length > 0 && (
+      {rounds.length > 0 && (
+        <div className="flex gap-2">
           <Button variant="ghost" size="sm" onClick={undoLastRound} className="flex-1">
             <Undo2 className="h-4 w-4 mr-1" />
             Undo
           </Button>
-        )}
-        {rounds.length > 0 && (
-          <Button onClick={handleFinish} className="flex-1">
+          <Button variant="outline" onClick={handleFinish} className="flex-1">
             Finish Game
           </Button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

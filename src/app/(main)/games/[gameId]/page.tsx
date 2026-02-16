@@ -1,7 +1,8 @@
 'use client';
 
 import { use, useState, useEffect } from 'react';
-import { useGame } from '@/lib/hooks/use-games';
+import { useRouter } from 'next/navigation';
+import { useGame, useGames } from '@/lib/hooks/use-games';
 import { PageContainer } from '@/components/layout/page-container';
 import { PlayerAvatar } from '@/components/players/player-avatar';
 import { Badge } from '@/components/ui/badge';
@@ -24,7 +25,10 @@ const scoringTypeDescriptions: Record<string, string> = {
 
 export default function GameDetailPage({ params }: { params: Promise<{ gameId: string }> }) {
   const { gameId } = use(params);
+  const router = useRouter();
   const game = useGame(gameId);
+  const { deleteGame } = useGames();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const completedCount = useLiveQuery(async () => {
     const sessions = await db.sessions
@@ -132,6 +136,43 @@ export default function GameDetailPage({ params }: { params: Promise<{ gameId: s
         <Button asChild variant="outline" className="w-full">
           <Link href={`/games/${game.id}/edit`}>Edit Settings</Link>
         </Button>
+      </div>
+
+      <div className="mt-8 pt-6 border-t">
+        {!showDeleteConfirm ? (
+          <Button
+            variant="outline"
+            className="w-full text-destructive hover:text-destructive"
+            onClick={() => setShowDeleteConfirm(true)}
+          >
+            Delete Game
+          </Button>
+        ) : (
+          <div className="space-y-2">
+            <p className="text-sm text-destructive text-center">
+              This will delete the game. Session history will be kept.
+            </p>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                className="flex-1"
+                onClick={() => setShowDeleteConfirm(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                className="flex-1"
+                onClick={async () => {
+                  await deleteGame(game.id);
+                  router.push('/games');
+                }}
+              >
+                Confirm Delete
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </PageContainer>
   );
