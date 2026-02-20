@@ -62,4 +62,10 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🪵',
     config: { minPlayers: 2, maxPlayers: 10 },
   },
+  {
+    name: 'Darts',
+    scoringType: ScoringType.ROUND_BASED,
+    icon: '🎯',
+    config: { minPlayers: 2, maxPlayers: 8, lowestWins: true, targetScore: 501 },
+  },
 ];
