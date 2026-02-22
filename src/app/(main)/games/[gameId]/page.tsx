@@ -1,7 +1,6 @@
 'use client';
 
 import { use, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { useGame, useGames } from '@/lib/hooks/use-games';
 import { PageContainer } from '@/components/layout/page-container';
 import { PlayerAvatar } from '@/components/players/player-avatar';
@@ -12,6 +11,8 @@ import { computeLeaderboard, type LeaderboardEntry } from '@/lib/stats/leaderboa
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/lib/db/database';
 import { GameWinDistributionChart } from '@/components/dashboard/game-win-distribution-chart';
+import { Heart, ShoppingCart } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 const scoringTypeDescriptions: Record<string, string> = {
@@ -23,12 +24,19 @@ const scoringTypeDescriptions: Record<string, string> = {
   cooperative: 'Cooperative game — track the level your team reaches.',
 };
 
+const categoryLabels: Record<string, string> = {
+  strategy: 'Strategy',
+  party: 'Party',
+  family: 'Family',
+  card_games: 'Card Games',
+  classic: 'Classic',
+  cooperative: 'Co-op',
+};
+
 export default function GameDetailPage({ params }: { params: Promise<{ gameId: string }> }) {
   const { gameId } = use(params);
-  const router = useRouter();
   const game = useGame(gameId);
-  const { deleteGame } = useGames();
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const { toggleFavourite } = useGames();
 
   const completedCount = useLiveQuery(async () => {
     const sessions = await db.sessions
@@ -56,15 +64,29 @@ export default function GameDetailPage({ params }: { params: Promise<{ gameId: s
     <PageContainer>
       <div className="flex items-center gap-4 mb-6">
         <span className="text-5xl">{game.icon}</span>
-        <div>
+        <div className="flex-1">
           <h2 className="text-2xl font-bold">{game.name}</h2>
           <div className="flex items-center gap-2 mt-1">
             <Badge variant="secondary">{game.scoringType.replace('_', ' ')}</Badge>
+            {game.category && (
+              <Badge variant="outline">{categoryLabels[game.category] ?? game.category}</Badge>
+            )}
             {completedCount > 0 && (
               <span className="text-xs text-muted-foreground">{completedCount} games</span>
             )}
           </div>
         </div>
+        <button
+          onClick={() => toggleFavourite(game.id)}
+          className="p-2 hover:bg-accent rounded-lg transition-colors"
+        >
+          <Heart
+            className={cn(
+              'h-6 w-6',
+              game.isFavourite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'
+            )}
+          />
+        </button>
       </div>
 
       <Card className="mb-4">
@@ -82,6 +104,25 @@ export default function GameDetailPage({ params }: { params: Promise<{ gameId: s
           </div>
         </CardContent>
       </Card>
+
+      {game.youtubeVideoId && (
+        <Card className="mb-4">
+          <CardHeader>
+            <CardTitle className="text-base">Learn How to Play</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="aspect-video rounded-lg overflow-hidden">
+              <iframe
+                src={`https://www.youtube.com/embed/${game.youtubeVideoId}`}
+                title={`How to play ${game.name}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Card className="mb-4">
         <CardHeader>
@@ -133,47 +174,19 @@ export default function GameDetailPage({ params }: { params: Promise<{ gameId: s
         <Button asChild className="w-full">
           <Link href={`/session/new?gameId=${game.id}`}>Play {game.name}</Link>
         </Button>
+        {game.amazonUrl && (
+          <Button asChild variant="outline" className="w-full">
+            <a href={game.amazonUrl} target="_blank" rel="noopener noreferrer">
+              <ShoppingCart className="h-4 w-4 mr-1" />
+              Buy This Game
+            </a>
+          </Button>
+        )}
         <Button asChild variant="outline" className="w-full">
           <Link href={`/games/${game.id}/edit`}>Edit Settings</Link>
         </Button>
       </div>
 
-      <div className="mt-8 pt-6 border-t">
-        {!showDeleteConfirm ? (
-          <Button
-            variant="outline"
-            className="w-full text-destructive hover:text-destructive"
-            onClick={() => setShowDeleteConfirm(true)}
-          >
-            Delete Game
-          </Button>
-        ) : (
-          <div className="space-y-2">
-            <p className="text-sm text-destructive text-center">
-              This will delete the game. Session history will be kept.
-            </p>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                className="flex-1"
-                onClick={() => setShowDeleteConfirm(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="destructive"
-                className="flex-1"
-                onClick={async () => {
-                  await deleteGame(game.id);
-                  router.push('/games');
-                }}
-              >
-                Confirm Delete
-              </Button>
-            </div>
-          </div>
-        )}
-      </div>
     </PageContainer>
   );
 }
