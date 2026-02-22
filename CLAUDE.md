@@ -98,4 +98,4 @@ If a phase fails exit gates, fix the issue and re-run gates before proceeding.
 | Phase 3: Favourites | COMPLETE |
 | Phase 4: Game Detail | COMPLETE |
 | Phase 5: Games List | COMPLETE |
-| Phase 6: Native App | NOT STARTED |
+| Phase 6: Native App | NEEDS USER INPUT |
