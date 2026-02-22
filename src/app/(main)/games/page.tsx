@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { PageContainer } from '@/components/layout/page-container';
 import { GameCard } from '@/components/games/game-card';
 import { Button } from '@/components/ui/button';
@@ -8,13 +8,13 @@ import { useGames } from '@/lib/hooks/use-games';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/lib/db/database';
 import { useRouter } from 'next/navigation';
-import { Plus, ArrowUpDown } from 'lucide-react';
+import { Plus, ArrowUpDown, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 type SortMode = 'alpha' | 'most_played';
 
 export default function GamesPage() {
-  const { games } = useGames();
+  const { games, toggleFavourite } = useGames();
   const router = useRouter();
   const [sort, setSort] = useState<SortMode>('alpha');
 
@@ -38,8 +38,9 @@ export default function GamesPage() {
     return sorted;
   };
 
-  const builtIn = sortGames(games.filter((g) => !g.isCustom));
-  const custom = sortGames(games.filter((g) => g.isCustom));
+  const favourites = sortGames(games.filter((g) => g.isFavourite));
+  const builtIn = sortGames(games.filter((g) => !g.isCustom && !g.isFavourite));
+  const custom = sortGames(games.filter((g) => g.isCustom && !g.isFavourite));
 
   return (
     <PageContainer>
@@ -64,6 +65,26 @@ export default function GamesPage() {
         </Button>
       </div>
 
+      {favourites.length > 0 && (
+        <div className="mb-6">
+          <h3 className="text-sm font-semibold text-muted-foreground mb-2 flex items-center gap-1.5">
+            <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" />
+            Favourites
+          </h3>
+          <div className="space-y-2">
+            {favourites.map((game) => (
+              <GameCard
+                key={game.id}
+                game={game}
+                onClick={() => router.push(`/games/${game.id}`)}
+                badge={playCounts.get(game.id) ? `${playCounts.get(game.id)} played` : undefined}
+                onToggleFavourite={toggleFavourite}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="space-y-2">
         {builtIn.map((game) => (
           <GameCard
@@ -71,6 +92,7 @@ export default function GamesPage() {
             game={game}
             onClick={() => router.push(`/games/${game.id}`)}
             badge={playCounts.get(game.id) ? `${playCounts.get(game.id)} played` : undefined}
+            onToggleFavourite={toggleFavourite}
           />
         ))}
       </div>
@@ -85,6 +107,7 @@ export default function GamesPage() {
                 game={game}
                 onClick={() => router.push(`/games/${game.id}`)}
                 badge={playCounts.get(game.id) ? `${playCounts.get(game.id)} played` : undefined}
+                onToggleFavourite={toggleFavourite}
               />
             ))}
           </div>

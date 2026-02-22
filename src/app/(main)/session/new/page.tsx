@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { useGames } from '@/lib/hooks/use-games';
 import { usePlayers } from '@/lib/hooks/use-players';
 import { createSession } from '@/lib/hooks/use-session';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 function NewSessionContent() {
@@ -46,24 +46,43 @@ function NewSessionContent() {
 
   // Step 1: Pick a game
   if (!selectedGameId) {
+    const favouriteGames = games.filter((g) => g.isFavourite);
+    const otherGames = games.filter((g) => !g.isFavourite);
+
+    const selectGame = (gameId: string) => {
+      setSelectedGameId(gameId);
+      setSelectedPlayerIds([]);
+    };
+
     return (
       <PageContainer>
         <h2 className="text-lg font-bold mb-4">Choose a Game</h2>
         {games.length === 0 ? (
           <p className="text-muted-foreground">No games available.</p>
         ) : (
-          <div className="space-y-2">
-            {games.map((game) => (
-              <GameCard
-                key={game.id}
-                game={game}
-                onClick={() => {
-                  setSelectedGameId(game.id);
-                  setSelectedPlayerIds([]);
-                }}
-              />
-            ))}
-          </div>
+          <>
+            {favouriteGames.length > 0 && (
+              <>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-2 flex items-center gap-1.5">
+                  <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" />
+                  Favourites
+                </h3>
+                <div className="space-y-2 mb-4">
+                  {favouriteGames.map((game) => (
+                    <GameCard key={game.id} game={game} onClick={() => selectGame(game.id)} />
+                  ))}
+                </div>
+                {otherGames.length > 0 && (
+                  <h3 className="text-sm font-semibold text-muted-foreground mb-2">All Games</h3>
+                )}
+              </>
+            )}
+            <div className="space-y-2">
+              {otherGames.map((game) => (
+                <GameCard key={game.id} game={game} onClick={() => selectGame(game.id)} />
+              ))}
+            </div>
+          </>
         )}
       </PageContainer>
     );

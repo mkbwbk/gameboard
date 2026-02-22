@@ -30,7 +30,14 @@ export function useGames() {
     await db.games.delete(id);
   }
 
-  return { games, addGame, updateGame, deleteGame };
+  async function toggleFavourite(id: string) {
+    const game = await db.games.get(id);
+    if (game) {
+      await db.games.update(id, { isFavourite: !game.isFavourite });
+    }
+  }
+
+  return { games, addGame, updateGame, deleteGame, toggleFavourite };
 }
 
 export function useGame(id: string | undefined) {
