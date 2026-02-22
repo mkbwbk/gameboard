@@ -4,19 +4,34 @@ import { useState } from 'react';
 import { PageContainer } from '@/components/layout/page-container';
 import { GameCard } from '@/components/games/game-card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useGames } from '@/lib/hooks/use-games';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/lib/db/database';
 import { useRouter } from 'next/navigation';
-import { Plus, ArrowUpDown, Heart } from 'lucide-react';
+import { Plus, ArrowUpDown, Heart, Search } from 'lucide-react';
+import { GameCategory } from '@/lib/models/game';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 type SortMode = 'alpha' | 'most_played';
+
+const CATEGORIES = [
+  { value: 'all', label: 'All' },
+  { value: GameCategory.STRATEGY, label: 'Strategy' },
+  { value: GameCategory.PARTY, label: 'Party' },
+  { value: GameCategory.FAMILY, label: 'Family' },
+  { value: GameCategory.CARD_GAMES, label: 'Card Games' },
+  { value: GameCategory.CLASSIC, label: 'Classic' },
+  { value: GameCategory.COOPERATIVE, label: 'Co-op' },
+];
 
 export default function GamesPage() {
   const { games, toggleFavourite } = useGames();
   const router = useRouter();
   const [sort, setSort] = useState<SortMode>('alpha');
+  const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
 
   // Get play counts per game
   const playCounts = useLiveQuery(async () => {
@@ -38,16 +53,60 @@ export default function GamesPage() {
     return sorted;
   };
 
-  const favourites = sortGames(games.filter((g) => g.isFavourite));
-  const builtIn = sortGames(games.filter((g) => !g.isCustom && !g.isFavourite));
-  const custom = sortGames(games.filter((g) => g.isCustom && !g.isFavourite));
+  // Filter by search
+  const searchFiltered = games.filter((g) =>
+    g.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Favourites (always shown at top, unaffected by category filter)
+  const favourites = sortGames(searchFiltered.filter((g) => g.isFavourite));
+
+  // Filter non-favourites by category
+  const categoryFiltered = searchFiltered.filter((g) => {
+    if (g.isFavourite) return false;
+    if (activeCategory === 'all') return true;
+    return g.category === activeCategory;
+  });
+
+  const builtIn = sortGames(categoryFiltered.filter((g) => !g.isCustom));
+  const custom = sortGames(categoryFiltered.filter((g) => g.isCustom));
 
   return (
     <PageContainer>
+      {/* Search bar */}
+      <div className="relative mb-3">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Search games..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="pl-9"
+        />
+      </div>
+
+      {/* Category filter chips */}
+      <div className="flex gap-1.5 overflow-x-auto pb-2 mb-3 -mx-1 px-1 [&::-webkit-scrollbar]:hidden">
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat.value}
+            onClick={() => setActiveCategory(cat.value)}
+            className={cn(
+              'shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors',
+              activeCategory === cat.value
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-muted text-muted-foreground hover:bg-accent'
+            )}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Sort + count + create */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <p className="text-sm text-muted-foreground">
-            {games.length} game{games.length !== 1 ? 's' : ''}
+            {builtIn.length + custom.length + favourites.length} game{(builtIn.length + custom.length + favourites.length) !== 1 ? 's' : ''}
           </p>
           <button
             onClick={() => setSort(sort === 'alpha' ? 'most_played' : 'alpha')}
@@ -65,6 +124,7 @@ export default function GamesPage() {
         </Button>
       </div>
 
+      {/* Favourites section */}
       {favourites.length > 0 && (
         <div className="mb-6">
           <h3 className="text-sm font-semibold text-muted-foreground mb-2 flex items-center gap-1.5">
@@ -85,6 +145,7 @@ export default function GamesPage() {
         </div>
       )}
 
+      {/* Built-in games */}
       <div className="space-y-2">
         {builtIn.map((game) => (
           <GameCard
@@ -97,6 +158,7 @@ export default function GamesPage() {
         ))}
       </div>
 
+      {/* Custom games */}
       {custom.length > 0 && (
         <div className="mt-6">
           <h3 className="text-sm font-semibold text-muted-foreground mb-2">Custom Games</h3>
@@ -112,6 +174,13 @@ export default function GamesPage() {
             ))}
           </div>
         </div>
+      )}
+
+      {/* Empty state */}
+      {builtIn.length === 0 && custom.length === 0 && favourites.length === 0 && (
+        <p className="text-sm text-muted-foreground text-center py-8">
+          No games found{search ? ` for "${search}"` : ''}.
+        </p>
       )}
     </PageContainer>
   );
