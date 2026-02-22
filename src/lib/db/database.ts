@@ -18,6 +18,12 @@ class GameBoardDB extends Dexie {
       sessions: 'id, gameId, status, startedAt, completedAt, *playerIds',
       scores: 'id, sessionId, type',
     });
+    this.version(2).stores({
+      players: 'id, name, createdAt',
+      games: 'id, name, scoringType, isCustom, isFavourite, category',
+      sessions: 'id, gameId, status, startedAt, completedAt, *playerIds',
+      scores: 'id, sessionId, type',
+    });
   }
 }
 

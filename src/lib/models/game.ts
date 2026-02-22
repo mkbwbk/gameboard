@@ -7,6 +7,15 @@ export enum ScoringType {
   COOPERATIVE = 'cooperative',
 }
 
+export enum GameCategory {
+  STRATEGY = 'strategy',
+  PARTY = 'party',
+  FAMILY = 'family',
+  CARD_GAMES = 'card_games',
+  CLASSIC = 'classic',
+  COOPERATIVE = 'cooperative',
+}
+
 export interface GameConfig {
   minPlayers: number;
   maxPlayers: number;
@@ -24,4 +33,8 @@ export interface Game {
   config: GameConfig;
   isCustom: boolean;
   createdAt: Date;
+  isFavourite?: boolean;
+  category?: GameCategory;
+  youtubeVideoId?: string;
+  amazonUrl?: string;
 }

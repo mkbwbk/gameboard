@@ -1,4 +1,4 @@
-# GameBoard
+# GameBoards
 
 Board game score tracking PWA for tracking games played with friends.
 
@@ -61,3 +61,41 @@ src/
 - Use shadcn/ui components from `@/components/ui/` — add new ones via `npx shadcn@latest add <component>`.
 - Tailwind classes with `cn()` utility for conditional merging.
 - Dark theme: the app uses a slate/dark color scheme by default.
+
+---
+
+## App Store Launch Plan
+
+The full implementation plan is at: `~/.claude/plans/valiant-inventing-zebra.md`
+
+### Execution Protocol
+
+Each phase below is self-contained. After completing a phase:
+1. Run exit gates (`npm run build`, `npm run lint`, manual verification)
+2. Update the Launch Status table below to mark the phase COMPLETE
+3. Commit the phase's changes with the specified commit message
+4. Proceed to the next NOT STARTED phase **without waiting for user confirmation**
+
+If a phase fails exit gates, fix the issue and re-run gates before proceeding.
+
+### Phase Summary
+
+| Phase | Description | Key Files |
+|---|---|---|
+| 1 | Model & DB — Add `GameCategory` enum, `isFavourite`, `category`, `youtubeVideoId`, `amazonUrl` to Game model. Bump Dexie to v2. | `src/lib/models/game.ts`, `src/lib/db/database.ts` |
+| 2 | 50 Games — Expand `DEFAULT_GAMES` from 10→~50. Add affiliate tag, YouTube IDs, Amazon URLs. Rename Shithead→Palace. Update seed logic. | `src/lib/constants/games.ts`, `src/lib/db/seed.ts` |
+| 3 | Favourites — `toggleFavourite()` hook, heart icon on GameCard, favourites section on games list and session picker. | `src/lib/hooks/use-games.ts`, `src/components/games/game-card.tsx`, `src/app/(main)/games/page.tsx`, `src/app/(main)/session/new/page.tsx` |
+| 4 | Game Detail — YouTube embed, "Buy This Game" Amazon link, favourite toggle, category badge on game detail page. | `src/app/(main)/games/[gameId]/page.tsx` |
+| 5 | Games List — Search bar, category filter chips, improved layout with favourites pinned at top. | `src/app/(main)/games/page.tsx` |
+| 6 | Native App — Capacitor setup, static export, iOS/Android platform config, app store metadata prep. | `next.config.ts`, `capacitor.config.ts`, `package.json` |
+
+### Launch Status
+
+| Phase | Status |
+|---|---|
+| Phase 1: Model & DB | COMPLETE |
+| Phase 2: 50 Games | NOT STARTED |
+| Phase 3: Favourites | NOT STARTED |
+| Phase 4: Game Detail | NOT STARTED |
+| Phase 5: Games List | NOT STARTED |
+| Phase 6: Native App | NOT STARTED |
