@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'GameBoard',
+    name: 'GameBoard - Score Tracker',
     short_name: 'GameBoard',
-    description: 'Track game scores with friends',
+    description: 'Track board game and card game scores with friends. 45+ popular games, leaderboards, and stats.',
     start_url: '/',
     display: 'standalone',
     background_color: '#0f172a',
@@ -18,19 +18,19 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/svg+xml',
       },
       {
-        src: '/icons/icon-192.svg',
+        src: '/icons/icon-192.png',
         sizes: '192x192',
-        type: 'image/svg+xml',
+        type: 'image/png',
       },
       {
-        src: '/icons/icon-512.svg',
+        src: '/icons/icon-512.png',
         sizes: '512x512',
-        type: 'image/svg+xml',
+        type: 'image/png',
       },
       {
-        src: '/icons/icon-maskable.svg',
+        src: '/icons/icon-maskable.png',
         sizes: '512x512',
-        type: 'image/svg+xml',
+        type: 'image/png',
         purpose: 'maskable',
       },
     ],
