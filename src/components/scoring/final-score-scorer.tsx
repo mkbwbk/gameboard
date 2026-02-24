@@ -16,7 +16,7 @@ interface FinalScoreScorerProps {
   onComplete: (scores: Record<string, number>) => void;
 }
 
-export function FinalScoreScorer({ session, game, players, onComplete }: FinalScoreScorerProps) {
+export function FinalScoreScorer({ players, onComplete }: FinalScoreScorerProps) {
   const [scores, setScores] = useState<Record<string, string>>(
     Object.fromEntries(players.map((p) => [p.id, '']))
   );

@@ -50,3 +50,8 @@ export async function abandonSession(id: string) {
 export async function updateSessionNotes(id: string, notes: string) {
   await db.sessions.update(id, { notes });
 }
+
+export async function deleteSession(id: string) {
+  await db.scores.where('sessionId').equals(id).delete();
+  await db.sessions.delete(id);
+}

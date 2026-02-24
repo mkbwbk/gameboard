@@ -44,6 +44,7 @@ export function ScoringEngine({ session, game, players, existingScore }: Scoring
     router.push(`/session/${session.id}/complete`);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function handleRoundComplete(winnerId: string) {
     const score = existingScore as RoundBasedScore | undefined;
     if (score) {

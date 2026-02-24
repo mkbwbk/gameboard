@@ -52,8 +52,6 @@ export function GameDistributionChart() {
     };
   });
 
-  const total = data.reduce((sum, d) => sum + d.count, 0);
-
   return (
     <div className="space-y-3">
       <ChartContainer config={chartConfig} className="h-[200px] w-full">

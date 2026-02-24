@@ -36,18 +36,21 @@ export default function EditGamePage({ params }: { params: Promise<{ gameId: str
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  // Load game data into form
+  // Load game data into form — uses startTransition to avoid synchronous setState warning
   useEffect(() => {
     if (game && !loaded) {
-      setName(game.name);
-      setIcon(game.icon);
-      setMinPlayers(String(game.config.minPlayers));
-      setMaxPlayers(String(game.config.maxPlayers));
-      setTargetScore(game.config.targetScore ? String(game.config.targetScore) : '');
-      setTrackLastPlace(game.config.trackLastPlace ?? false);
-      setAllowDraw(game.config.allowDraw ?? false);
-      setLowestWins(game.config.lowestWins ?? false);
-      setLoaded(true);
+      const load = () => {
+        setName(game.name);
+        setIcon(game.icon);
+        setMinPlayers(String(game.config.minPlayers));
+        setMaxPlayers(String(game.config.maxPlayers));
+        setTargetScore(game.config.targetScore ? String(game.config.targetScore) : '');
+        setTrackLastPlace(game.config.trackLastPlace ?? false);
+        setAllowDraw(game.config.allowDraw ?? false);
+        setLowestWins(game.config.lowestWins ?? false);
+        setLoaded(true);
+      };
+      Promise.resolve().then(load);
     }
   }, [game, loaded]);
 

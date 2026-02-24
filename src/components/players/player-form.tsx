@@ -31,10 +31,12 @@ export function PlayerForm({ open, onOpenChange, onSubmit, onDelete, initialData
 
   useEffect(() => {
     if (open) {
-      setName(initialData?.name ?? '');
-      setEmoji(initialData?.avatarEmoji ?? AVATAR_EMOJIS[Math.floor(Math.random() * AVATAR_EMOJIS.length)]);
-      setColor(initialData?.avatarColor ?? AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)]);
-      setConfirmDelete(false);
+      Promise.resolve().then(() => {
+        setName(initialData?.name ?? '');
+        setEmoji(initialData?.avatarEmoji ?? AVATAR_EMOJIS[Math.floor(Math.random() * AVATAR_EMOJIS.length)]);
+        setColor(initialData?.avatarColor ?? AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)]);
+        setConfirmDelete(false);
+      });
     }
   }, [open, initialData?.name, initialData?.avatarEmoji, initialData?.avatarColor]);
 

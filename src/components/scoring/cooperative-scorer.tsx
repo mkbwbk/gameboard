@@ -17,7 +17,7 @@ interface CooperativeScorerProps {
   onComplete: (levelReached: number, won: boolean) => void;
 }
 
-export function CooperativeScorer({ session, game, players, onComplete }: CooperativeScorerProps) {
+export function CooperativeScorer({ players, onComplete }: CooperativeScorerProps) {
   const [level, setLevel] = useState(1);
   const [won, setWon] = useState<boolean | null>(null);
 

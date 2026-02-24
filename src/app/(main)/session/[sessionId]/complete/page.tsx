@@ -2,7 +2,8 @@
 
 import { use, useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { useSession, updateSessionNotes } from '@/lib/hooks/use-session';
+import { useRouter } from 'next/navigation';
+import { useSession, updateSessionNotes, deleteSession } from '@/lib/hooks/use-session';
 import { useGame } from '@/lib/hooks/use-games';
 import { useScore } from '@/lib/hooks/use-scores';
 import { useLiveQuery } from 'dexie-react-hooks';
@@ -19,7 +20,9 @@ import type { WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloSco
 
 export default function SessionCompletePage({ params }: { params: Promise<{ sessionId: string }> }) {
   const { sessionId } = use(params);
+  const router = useRouter();
   const session = useSession(sessionId);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const game = useGame(session?.gameId);
   const score = useScore(sessionId);
 
@@ -52,7 +55,6 @@ export default function SessionCompletePage({ params }: { params: Promise<{ sess
     );
   }
 
-  const getPlayerName = (id: string) => players.find((p) => p.id === id)?.name ?? 'Unknown';
   const getPlayer = (id: string) => players.find((p) => p.id === id);
 
   return (
@@ -122,7 +124,6 @@ export default function SessionCompletePage({ params }: { params: Promise<{ sess
 
           {score.type === 'race' && (() => {
             const s = score as RaceScore;
-            const winner = s.winnerId ? getPlayer(s.winnerId) : null;
             return (
               <div className="space-y-3">
                 <div className="flex items-center justify-center gap-8">
@@ -229,6 +230,43 @@ export default function SessionCompletePage({ params }: { params: Promise<{ sess
         <Button asChild className="flex-1">
           <Link href={`/session/new?gameId=${session.gameId}&players=${session.playerIds.join(',')}`}>Play Again</Link>
         </Button>
+      </div>
+
+      <div className="mt-8 pt-6 border-t">
+        {!showDeleteConfirm ? (
+          <Button
+            variant="outline"
+            className="w-full text-destructive hover:text-destructive"
+            onClick={() => setShowDeleteConfirm(true)}
+          >
+            Delete Session
+          </Button>
+        ) : (
+          <div className="space-y-2">
+            <p className="text-sm text-destructive text-center">
+              This will permanently delete this session and its scores.
+            </p>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                className="flex-1"
+                onClick={() => setShowDeleteConfirm(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                className="flex-1"
+                onClick={async () => {
+                  await deleteSession(session.id);
+                  router.push('/history');
+                }}
+              >
+                Confirm Delete
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </PageContainer>
   );

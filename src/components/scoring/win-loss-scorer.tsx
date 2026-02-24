@@ -15,7 +15,7 @@ interface WinLossScorerProps {
   onComplete: (winnerId: string, loserId?: string) => void;
 }
 
-export function WinLossScorer({ session, game, players, onComplete }: WinLossScorerProps) {
+export function WinLossScorer({ game, players, onComplete }: WinLossScorerProps) {
   const trackLastPlace = game.config.trackLastPlace;
   const [winnerId, setWinnerId] = useState<string | null>(null);
   const [loserId, setLoserId] = useState<string | null>(null);

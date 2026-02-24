@@ -6,7 +6,6 @@ import { db } from '@/lib/db/database';
 import { PageContainer } from '@/components/layout/page-container';
 import { PlayerAvatar } from '@/components/players/player-avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { computePlayerStats, type PlayerProfileStats } from '@/lib/stats/player-stats';
 import Link from 'next/link';

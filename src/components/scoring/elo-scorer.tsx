@@ -18,7 +18,7 @@ interface EloScorerProps {
   onComplete: (result: 'player1_win' | 'player2_win' | 'draw') => void;
 }
 
-export function EloScorer({ session, game, players, onComplete }: EloScorerProps) {
+export function EloScorer({ game, players, onComplete }: EloScorerProps) {
   const [result, setResult] = useState<'player1_win' | 'player2_win' | 'draw' | null>(null);
 
   const player1 = players[0];

@@ -79,7 +79,7 @@ export function SessionCard({ session, game, players, score, onClick }: SessionC
           <p className="text-xs text-muted-foreground truncate">{getResultSummary(score, players, game)}</p>
         )}
         {session.notes && (
-          <p className="text-xs text-muted-foreground/70 truncate italic">"{session.notes}"</p>
+          <p className="text-xs text-muted-foreground/70 truncate italic">&ldquo;{session.notes}&rdquo;</p>
         )}
         <div className="flex items-center gap-1 mt-1">
           {players.slice(0, 4).map((p) => (

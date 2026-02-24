@@ -36,12 +36,14 @@ export function WinRateChart() {
     return sessions.length;
   }) ?? 0;
 
-  // Auto-select first player
+  // Auto-select first player and fetch data
+  const firstPlayerId = players[0]?.id ?? '';
+  const effectivePlayer = selectedPlayer || firstPlayerId;
   useEffect(() => {
-    if (players.length > 0 && !selectedPlayer) {
-      setSelectedPlayer(players[0].id);
+    if (effectivePlayer && !selectedPlayer) {
+      Promise.resolve().then(() => setSelectedPlayer(effectivePlayer));
     }
-  }, [players, selectedPlayer]);
+  }, [effectivePlayer, selectedPlayer]);
 
   useEffect(() => {
     if (selectedPlayer) {

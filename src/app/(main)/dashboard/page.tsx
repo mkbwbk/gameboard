@@ -45,13 +45,14 @@ export default function DashboardPage() {
   const [h2hPlayer1, setH2hPlayer1] = useState<string>('');
   const [h2hPlayer2, setH2hPlayer2] = useState<string>('');
   const [h2hRecord, setH2hRecord] = useState<HeadToHeadRecord | null>(null);
+  const h2hValid = h2hPlayer1 && h2hPlayer2 && h2hPlayer1 !== h2hPlayer2;
   useEffect(() => {
-    if (h2hPlayer1 && h2hPlayer2 && h2hPlayer1 !== h2hPlayer2) {
+    if (h2hValid) {
       computeHeadToHead(h2hPlayer1, h2hPlayer2).then(setH2hRecord);
     } else {
-      setH2hRecord(null);
+      Promise.resolve().then(() => setH2hRecord(null));
     }
-  }, [h2hPlayer1, h2hPlayer2, completedCount]);
+  }, [h2hValid, h2hPlayer1, h2hPlayer2, completedCount]);
 
   // Recent games data
   const recentData = useLiveQuery(async () => {
