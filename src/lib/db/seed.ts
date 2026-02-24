@@ -2,7 +2,16 @@ import { db } from './database';
 import { DEFAULT_GAMES } from '@/lib/constants/games';
 import { generateId } from '@/lib/utils';
 
-export async function seedDefaultGames() {
+let seeding: Promise<void> | null = null;
+
+export function seedDefaultGames() {
+  if (!seeding) {
+    seeding = doSeed().finally(() => { seeding = null; });
+  }
+  return seeding;
+}
+
+async function doSeed() {
   const existingGames = await db.games.filter((g) => !g.isCustom).toArray();
   const existingNames = new Set(existingGames.map((g) => g.name));
 

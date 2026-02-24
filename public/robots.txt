@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /games
+Disallow: /players
+Disallow: /history
+Disallow: /session
+Disallow: /settings
+
+Sitemap: https://pointspad.com/sitemap.xml

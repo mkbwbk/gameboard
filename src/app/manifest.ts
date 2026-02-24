@@ -2,10 +2,10 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'GameBoard - Score Tracker',
-    short_name: 'GameBoard',
+    name: 'Points Pad - Score Tracker',
+    short_name: 'Points Pad',
     description: 'Track board game and card game scores with friends. 45+ popular games, leaderboards, and stats.',
-    start_url: '/',
+    start_url: '/dashboard',
     display: 'standalone',
     background_color: '#0f172a',
     theme_color: '#6366f1',

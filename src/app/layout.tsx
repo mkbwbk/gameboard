@@ -13,12 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GameBoard",
-  description: "Track game scores with friends",
+  metadataBase: new URL("https://pointspad.com"),
+  title: "Points Pad",
+  description: "Track board game scores with friends",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "GameBoard",
+    title: "Points Pad",
   },
   icons: {
     icon: "/icons/icon.svg",

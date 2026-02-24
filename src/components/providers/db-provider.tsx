@@ -22,7 +22,7 @@ export function DBProvider({ children }: { children: React.ReactNode }) {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="text-3xl mb-2">🎮</div>
-          <p className="text-sm text-muted-foreground">Loading GameBoard...</p>
+          <p className="text-sm text-muted-foreground">Loading Points Pad...</p>
         </div>
       </div>
     );

@@ -2,6 +2,17 @@ import { ScoringType, type GameConfig, GameCategory } from '@/lib/models/game';
 
 export const AFFILIATE_TAG = 'gameboard-20';
 
+export function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+export function findGameBySlug(slug: string): DefaultGameDef | undefined {
+  return DEFAULT_GAMES.find((g) => slugify(g.name) === slug);
+}
+
 interface DefaultGameDef {
   name: string;
   scoringType: ScoringType;

@@ -1,11 +1,10 @@
-const CACHE_NAME = 'gameboard-v2';
+const CACHE_NAME = 'pointspad-v2';
 
 // Install: cache the app shell
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
-        '/',
         '/dashboard',
         '/games',
         '/players',
@@ -51,7 +50,7 @@ self.addEventListener('fetch', (event) => {
       .catch(() => {
         // Fallback to cache when offline
         return caches.match(event.request).then((cached) => {
-          return cached || caches.match('/');
+          return cached || caches.match('/dashboard');
         });
       })
   );

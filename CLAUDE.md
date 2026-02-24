@@ -1,6 +1,6 @@
-# GameBoards
+# Points Pad
 
-Board game score tracking PWA for tracking games played with friends.
+Board game score tracking PWA for tracking games played with friends. Rebranded from "GameBoard" to **Points Pad**.
 
 ## Tech Stack
 
@@ -12,7 +12,7 @@ Board game score tracking PWA for tracking games played with friends.
 
 ## Commands
 
-- `npm run dev` — start dev server
+- `npm run dev` — start dev server (port 3000)
 - `npm run build` — production build
 - `npm run lint` — ESLint (next/core-web-vitals + typescript)
 
@@ -20,47 +20,104 @@ Board game score tracking PWA for tracking games played with friends.
 
 ```
 src/
-  app/                    # Next.js App Router pages
-    (main)/               # Route group with bottom nav layout
-      dashboard/          # Stats & charts
-      games/              # Game CRUD & detail views
-      players/            # Player list & profiles
-      session/            # Score recording flow (new → active → complete)
-      history/            # Past sessions
-      settings/           # App settings
+  app/
+    (marketing)/              # Marketing/sales site (landing page, game pages, privacy)
+      page.tsx                # Landing page at /
+      layout.tsx              # Dark themed, full-width, SEO metadata
+      privacy/page.tsx        # Privacy policy
+      game/[slug]/page.tsx    # Individual game landing pages (45 pages, SSG)
+    (main)/                   # Route group with bottom nav layout (the actual app)
+      dashboard/              # Stats & charts
+      games/                  # Game CRUD & detail views
+      players/                # Player list & profiles
+      session/                # Score recording flow (new → active → complete)
+      history/                # Past sessions
+      settings/               # App settings
+    layout.tsx                # Root layout (metadataBase: pointspad.com)
+    manifest.ts               # PWA manifest (Points Pad)
+    sitemap.ts                # Sitemap with all game pages
   components/
-    ui/                   # shadcn/ui primitives
-    scoring/              # Scoring UI per type (race, round, win-loss, elo, etc.)
-    dashboard/            # Chart components
-    players/              # Player avatar, card, form, picker
-    games/                # Game card
-    layout/               # Header, bottom nav, page container
-    shared/               # Reusable components (empty-state)
-    providers/            # DbProvider context
+    marketing/                # Marketing site components
+      hero-section.tsx        # Animated hero with phone mockup, floating cards, count-up numbers
+      features-section.tsx    # 4 feature cards with scroll-triggered animations
+      game-library-section.tsx # Clickable grid of 45 games (links to /game/[slug])
+      scoring-types-section.tsx
+      stats-section.tsx
+      privacy-section.tsx
+      faq-section.tsx
+      final-cta-section.tsx
+      marketing-nav.tsx       # Sticky nav with anchor links
+      marketing-footer.tsx
+      phone-mockup.tsx        # iPhone frame component
+      app-store-badges.tsx    # App Store + Google Play badges
+      animate-on-scroll.tsx   # IntersectionObserver animation wrapper
+    ui/                       # shadcn/ui primitives
+    scoring/                  # Scoring UI per type (race, round, win-loss, elo, etc.)
+    dashboard/                # Chart components
+    players/                  # Player avatar, card, form, picker
+    games/                    # Game card
+    layout/                   # Header, bottom nav, page container
+    shared/                   # Reusable components (empty-state)
+    providers/                # DbProvider context
   lib/
-    db/                   # Dexie database, seed data, backup/restore
-    models/               # TypeScript interfaces (Player, Game, GameSession, ScoreData)
-    hooks/                # Data hooks (use-players, use-games, use-session, use-scores, use-elo, use-theme)
-    scoring/              # ELO calculation logic
-    stats/                # Aggregation, leaderboard, head-to-head, player/game stats
-    constants/            # Preset games, avatar options
-    utils.ts              # cn() helper (clsx + tailwind-merge)
+    db/                       # Dexie database, seed data, backup/restore
+    models/                   # TypeScript interfaces (Player, Game, GameSession, ScoreData)
+    hooks/                    # Data hooks (use-players, use-games, use-session, use-scores, use-elo, use-theme)
+    scoring/                  # ELO calculation logic
+    stats/                    # Aggregation, leaderboard, head-to-head, player/game stats
+    constants/                # Preset games (45), avatar options, slugify(), findGameBySlug()
+    utils.ts                  # cn() helper (clsx + tailwind-merge)
 ```
 
 ## Key Patterns
 
+- **Two route groups:** `(marketing)` for the public sales site (no DB, full-width, dark theme). `(main)` for the actual app (Header, BottomNav, DBProvider, max-w-lg).
 - **Client-only app.** No API routes, no server data fetching. All state lives in IndexedDB via Dexie. Use `useLiveQuery` from dexie-react-hooks for reactive data.
 - **Path alias:** `@/*` maps to `./src/*`.
 - **Scoring types:** Race, Round-based, Win/Loss, Final Score, ELO, Cooperative — each has its own scorer component in `components/scoring/` and a corresponding type in `lib/models/score.ts`.
 - **Models use string IDs** generated with nanoid.
 - **Components are client components** (`"use client"`) since data comes from IndexedDB.
-- **PWA:** Service worker at `public/sw.js`, manifest in `src/app/manifest.ts`.
+- **PWA:** Service worker at `public/sw.js` (cache name: `pointspad-v2`), manifest in `src/app/manifest.ts`. `start_url: '/dashboard'` so installed PWA bypasses marketing site.
+- **Game slugs:** `slugify()` and `findGameBySlug()` in `lib/constants/games.ts`. URL pattern: `/game/{slug}` (e.g., `/game/catan`, `/game/wingspan`).
+- **CSS animations:** Marketing animations defined in `globals.css` with `pp-` prefix (pp-float, pp-fade-in-up, pp-scale-in, etc.). No framer-motion — pure CSS + IntersectionObserver.
 
 ## Style Guide
 
 - Use shadcn/ui components from `@/components/ui/` — add new ones via `npx shadcn@latest add <component>`.
 - Tailwind classes with `cn()` utility for conditional merging.
 - Dark theme: the app uses a slate/dark color scheme by default.
+- Marketing site background: `#060612`.
+
+---
+
+## Marketing Site (COMPLETE)
+
+Full marketing/sales landing page built at `/` with 45 individual game landing pages.
+
+### What Was Built
+
+| Feature | Description | Status |
+|---|---|---|
+| Landing Page | Hero with animated phone mockup, floating info cards, count-up numbers. Trust bar, features, games grid, scoring types, stats preview, privacy, FAQ, CTA. | ✅ COMPLETE |
+| Game Landing Pages | 45 individual SEO-optimized pages at `/game/[slug]` with scoring explanation, YouTube embed, Amazon link, stats preview, FAQ, related games, CTAs. Static generation via `generateStaticParams`. | ✅ COMPLETE |
+| SEO | JSON-LD (SoftwareApplication + FAQPage), Open Graph, per-page meta, sitemap with all game URLs, robots.txt. | ✅ COMPLETE |
+| Privacy Policy | Full privacy policy at `/privacy`. | ✅ COMPLETE |
+| Animations | Hero: count-up numbers, growing bars, staggered floating cards. Features: scroll-triggered card fade-in + bar growth. CSS-only with IntersectionObserver. | ✅ COMPLETE |
+| Rebrand | Renamed from GameBoard → Points Pad across manifest, sw.js, header, layout, metadata. | ✅ COMPLETE |
+| App Store Badges | Apple App Store + Google Play placeholder badges with correct logos. | ✅ COMPLETE |
+
+### Key Marketing Files
+
+| Area | Files |
+|---|---|
+| Landing Page | `src/app/(marketing)/page.tsx`, `src/app/(marketing)/layout.tsx` |
+| Game Pages | `src/app/(marketing)/game/[slug]/page.tsx` |
+| Hero | `src/components/marketing/hero-section.tsx` |
+| Games Grid | `src/components/marketing/game-library-section.tsx` |
+| Game Data | `src/lib/constants/games.ts` (slugify, findGameBySlug, DEFAULT_GAMES) |
+| SEO | `src/app/sitemap.ts`, `public/robots.txt`, JSON-LD in page components |
+| Animations | `src/app/globals.css` (pp-* keyframes), `src/components/marketing/animate-on-scroll.tsx` |
+| Privacy | `src/app/(marketing)/privacy/page.tsx` |
 
 ---
 
@@ -79,7 +136,7 @@ All 6 development phases are **COMPLETE**. The full implementation history is at
 | 5 | Games List — Search bar, category filter chips, favourites section at top. | ✅ COMPLETE |
 | 6 | Native App — PWA manifest updated, PNG icons generated (192/512/maskable). PWABuilder approach chosen. | ✅ COMPLETE |
 
-### Key Files Modified
+### Key App Files
 
 | Area | Files |
 |---|---|
@@ -90,69 +147,151 @@ All 6 development phases are **COMPLETE**. The full implementation history is at
 | Session Picker | `src/app/(main)/session/new/page.tsx` |
 | PWA | `src/app/manifest.ts`, `public/icons/icon-192.png`, `public/icons/icon-512.png`, `public/icons/icon-maskable.png` |
 
-### Remaining Pre-Release Tasks
+---
 
-These tasks must be completed before the app is ready for app store submission. They can be done by Claude in a new session or manually by the developer.
+## Marketing Site Improvements (COMPLETE)
 
-#### 1. Verify & Fix YouTube Video IDs (CODE TASK)
-The YouTube video IDs in `src/lib/constants/games.ts` are best-effort from training data. Many may be broken or link to the wrong video.
-- **What to do:** For each game's `youtubeVideoId`, verify `https://www.youtube.com/watch?v={videoId}` loads a relevant "how to play" tutorial. Replace any broken/incorrect IDs.
-- **File:** `src/lib/constants/games.ts` — each game entry has an optional `youtubeVideoId` field.
-- **Tip:** Use browser tools or web search to find the correct video IDs. Search YouTube for `"how to play {game name}"` and grab the video ID from the URL.
+Improvements made to the marketing/sales site for SEO and UX.
 
-#### 2. Verify & Fix Amazon ASINs (CODE TASK)
-The Amazon product ASINs in `src/lib/constants/games.ts` are best-effort. Some may link to wrong products or dead listings.
-- **What to do:** For each game's `amazonUrl`, verify the link loads the correct product on Amazon. Fix any broken ASINs.
-- **File:** `src/lib/constants/games.ts` — the `amazonUrl(asin)` helper builds URLs like `https://www.amazon.com/dp/{ASIN}?tag=gameboard-20`.
-- **Tip:** Search Amazon for the game name and grab the ASIN from the product URL (the 10-character alphanumeric code after `/dp/`).
+| Improvement | Description | Status |
+|---|---|---|
+| Game-Specific Scoring FAQs | Replaced generic FAQs on all 45 `/game/[slug]` pages with scoring-type-specific Q&A content. 5 FAQs per scoring type + custom overrides for 7 high-traffic games (Catan, Monopoly, Scrabble, Chess, Wingspan, Ticket to Ride, Darts). SEO-targeted for queries like "how to score in Catan". JSON-LD FAQPage schema unchanged. | ✅ COMPLETE |
+| Interactive Category Filters | Homepage games grid category chips now clickable — filters the 45-game grid by category with game count. Converted `GameLibrarySection` to client component. | ✅ COMPLETE |
+| SEO Cleanup | Removed `/dashboard` from sitemap (private app route). Added `Disallow` rules in `robots.txt` for all app routes (`/dashboard`, `/games`, `/players`, `/history`, `/session`, `/settings`). | ✅ COMPLETE |
+| PWA Isolation | Changed `start_url` from `/` to `/dashboard` in manifest so installed PWA opens to app, not marketing site. Updated SW to v2: removed `/` from pre-cache, offline fallback to `/dashboard`. | ✅ COMPLETE |
+| Seed Deduplication | Fixed React StrictMode double-seed bug that created duplicate games in dev. Module-level promise guard in `seed.ts`. | ✅ COMPLETE |
+| Rebrand Cleanup | Changed "Loading GameBoard..." → "Loading Points Pad..." in `db-provider.tsx`. | ✅ COMPLETE |
 
-#### 3. Update Amazon Affiliate Tag (CODE TASK)
-The affiliate tag is currently a **placeholder**: `gameboard-20`.
-- **What to do:** Replace with the real Amazon Associates tag.
-- **File:** `src/lib/constants/games.ts`, line 3: `export const AFFILIATE_TAG = 'gameboard-20';`
+### Key Files Changed
 
-#### 4. Deploy to Vercel (MANUAL)
-The branch is ahead of origin. Push to deploy:
+| Area | Files |
+|---|---|
+| Scoring FAQs | `src/lib/constants/game-faqs.ts` (NEW), `src/app/(marketing)/game/[slug]/page.tsx` |
+| Category Filters | `src/components/marketing/game-library-section.tsx` |
+| SEO | `src/app/sitemap.ts`, `public/robots.txt` |
+| PWA | `src/app/manifest.ts`, `public/sw.js` |
+| Seed Fix | `src/lib/db/seed.ts` |
+| Rebrand | `src/components/providers/db-provider.tsx` |
+
+---
+
+## Remaining Pre-Release Tasks
+
+### Code Tasks
+
+1. **Verify & Fix YouTube Video IDs** — IDs in `src/lib/constants/games.ts` are best-effort. Verify each `youtubeVideoId` loads a relevant tutorial. Search YouTube for "how to play {game name}" to find correct IDs.
+
+2. **Verify & Fix Amazon ASINs** — ASINs in `src/lib/constants/games.ts` are best-effort. Verify each `amazonUrl` loads the correct product. The `amazonUrl(asin)` helper builds `https://www.amazon.com/dp/{ASIN}?tag=gameboard-20`.
+
+3. **Update Amazon Affiliate Tag** — Currently placeholder `gameboard-20` in `src/lib/constants/games.ts` line 3. Replace with real Amazon Associates tag.
+
+4. **Generate 1024px App Icon** — Apple requires 1024×1024 PNG with no transparency. Source: `public/icons/icon.svg`. Use sharp-cli to generate.
+
+5. ~~**Review Service Worker**~~ — ✅ DONE. SW updated to v2, pre-caches only app routes, offline fallback to `/dashboard`.
+
+6. **Fix Pre-Existing Lint Warnings** — Run `npm run lint`. There are pre-existing warnings (setState in effects, unused vars, unescaped entities). Not blocking but should be cleaned up.
+
+---
+
+## App Store Launch Guide
+
+### Architecture: How Marketing Site and PWA Coexist
+
+The marketing site and app are in the **same Next.js project** using route groups:
+- `(marketing)` → `/` (landing page), `/game/[slug]` (45 game pages), `/privacy`
+- `(main)` → `/dashboard`, `/games`, `/players`, `/history`, `/session/*`, `/settings`
+
+**Why this works for a PWA:**
+- `manifest.ts` sets `start_url: '/dashboard'` — installed PWA opens directly to the app
+- `display: 'standalone'` — no browser chrome, no URL bar, users can't navigate to marketing pages
+- Bottom nav only links to app routes — no path from the app UI to the marketing site
+- Service worker (v2) caches only app routes and falls back to `/dashboard` offline
+- `robots.txt` blocks crawlers from app routes; `sitemap.ts` only includes marketing pages
+
+**Web visitors** see the marketing site at `pointspad.com`. **PWA/app store users** see the app at `/dashboard`. Same domain, same deployment, completely separate experiences.
+
+### Deployment: How to Ship to Vercel
+
+1. Push to git → Vercel auto-deploys from the connected repo
+2. Verify at `https://pointspad.com`:
+   - `/` shows marketing landing page
+   - `/game/catan` shows game-specific page with scoring FAQs
+   - `/dashboard` shows the app (after IndexedDB seeds)
+   - `/manifest.webmanifest` shows `start_url: "/dashboard"`
+3. Test PWA install: Chrome > three-dot menu > "Install Points Pad" → should open to dashboard
+
+### App Store Submission: Step-by-Step
+
+#### Prerequisites
+
+| Requirement | Status | Notes |
+|---|---|---|
+| Apple Developer account ($99/yr) | ❌ Needed | [developer.apple.com/programs](https://developer.apple.com/programs/) |
+| Google Play Console ($25 one-time) | ❌ Needed | [play.google.com/console](https://play.google.com/console/) |
+| Privacy policy URL | ✅ Ready | `https://pointspad.com/privacy` |
+| 1024×1024 app icon (no transparency) | ❌ Needed | Generate from `public/icons/icon.svg` with sharp-cli |
+| App screenshots (iPhone + Android) | ❌ Needed | 6.7" iPhone (1290×2796), 5.5" iPhone (1242×2208), Android phone (1080×1920) |
+| App description & metadata | ✅ Draft | Name: "Points Pad - Score Tracker" |
+
+#### Step 1: Deploy to Vercel
 ```bash
-git push
+git push origin main
 ```
+Verify the live site works at `pointspad.com`. Test the PWA install from Chrome.
 
-#### 5. Generate 1024px App Icon (CODE TASK)
-Apple App Store requires a 1024×1024 PNG icon with **no transparency** (no alpha channel). Currently only 192px and 512px icons exist.
-- **What to do:** Generate `public/icons/icon-1024.png` from the SVG source. Ensure it has no alpha channel (use a white or dark background fill).
-- **Source SVG:** `public/icons/icon.svg`
-- **Tool:** `npx sharp-cli -i public/icons/icon.svg -o public/icons/icon-1024.png resize 1024 1024` (then flatten alpha with `--flatten` or add background)
+#### Step 2: Generate App Packages with PWABuilder
 
-#### 6. Review Service Worker Caching (CODE TASK)
-The service worker at `public/sw.js` uses network-first with cache fallback. Before release:
-- **Bump `CACHE_NAME`** from `'gameboard-v1'` to `'gameboard-v2'` to invalidate old caches after the launch changes.
-- **Verify cached routes** — The install cache lists `/`, `/dashboard`, `/games`, `/players`, `/history`, `/session/new`. Ensure these still match the app's routes.
-- The network-first strategy is fine for a PWABuilder-wrapped app since it will always try the live Vercel URL first.
+1. Go to [pwabuilder.com](https://www.pwabuilder.com/)
+2. Enter `https://pointspad.com`
+3. PWABuilder will read the manifest and validate the PWA
+4. Click **"Package for stores"**
+5. Download:
+   - **iOS** → Xcode project (`.xcodeproj`)
+   - **Android** → Signed APK/AAB (`.aab`)
 
-#### 7. PWABuilder App Store Submission (MANUAL)
-1. Go to [pwabuilder.com](https://www.pwabuilder.com)
-2. Enter the deployed Vercel URL
-3. Generate iOS and Android packages
-4. **Test before submitting:** iOS via TestFlight, Android via Google Play internal testing track
-5. Submit to Apple App Store and Google Play Store
+#### Step 3: iOS App Store (via TestFlight first)
 
-#### 8. App Store Prerequisites (MANUAL)
-- **Apple Developer account** — $99/year at [developer.apple.com](https://developer.apple.com)
-- **Google Play Console** — $25 one-time at [play.google.com/console](https://play.google.com/console)
-- **Privacy policy URL** — Required by both stores. Create and host a privacy policy page (can be a simple page on the Vercel domain, e.g. `/privacy`).
-- **App pricing** — Decide on free vs paid and price point.
-- **Screenshots** — Capture screenshots for store listings (iPhone 6.7", iPad 12.9", Android phone). Aim for 4–6 screens showing: games list, game detail with YouTube, active scoring session, dashboard/stats.
-- **App metadata** — Name: "GameBoard - Score Tracker", Category: Games > Board Games, Age: 4+
-- **App description** — Write a compelling store description (short + long versions).
+1. Open the PWABuilder-generated Xcode project
+2. Set the **Bundle Identifier** (e.g., `com.pointspad.app`)
+3. Set the **Team** to your Apple Developer account
+4. Update **Info.plist** with app name, version (1.0.0), and description
+5. Archive the build: **Product → Archive** in Xcode
+6. Upload to App Store Connect via **Distribute App → App Store Connect**
+7. In [App Store Connect](https://appstoreconnect.apple.com/):
+   - Create new app: "Points Pad - Score Tracker"
+   - Category: Games > Board
+   - Age rating: 4+ (no objectionable content)
+   - Privacy policy URL: `https://pointspad.com/privacy`
+   - Upload screenshots (6.7" and 5.5" required)
+   - Add keywords: `board game score tracker, scorekeeper, game night, score counter`
+   - Submit TestFlight build for **internal testing** first
+8. After testing, submit for **App Review**
 
-#### 9. Apple App Review Compliance (IMPORTANT)
-Apple may reject PWA wrappers under **Guideline 4.2** ("Minimum Functionality") if the app feels like "just a website." To reduce rejection risk:
-- The app stores all data locally (IndexedDB) — this is genuine native-like functionality.
-- Offline support via service worker is a strong signal.
-- Consider adding a brief splash/onboarding screen on first launch to feel more app-like.
-- If rejected, the appeal should emphasize: offline-first architecture, local data storage, no server dependency.
+**Apple Guideline 4.2 (Minimum Functionality) considerations:**
+- App stores data locally + works offline ✅
+- Has unique features (45 games, ELO, stats, leaderboards) ✅
+- Not just a website wrapper — has IndexedDB storage, offline capability, native-feel UI ✅
+- Consider adding an onboarding flow for first launch to demonstrate value
 
-#### 10. Pre-Existing Lint Warnings (OPTIONAL)
-There are 7 pre-existing ESLint errors and 13 warnings (setState in effects, unused vars, unescaped entities). These are not from the launch work but should be cleaned up before release.
-- Run `npm run lint` to see the full list.
-- These do **not** block the build.
+#### Step 4: Google Play Store
+
+1. Sign in to [Google Play Console](https://play.google.com/console/)
+2. Create new app: "Points Pad - Score Tracker"
+3. Upload the PWABuilder-generated AAB file
+4. Fill in store listing:
+   - Short description (80 chars): "Track board game scores with 45+ games, stats & leaderboards"
+   - Full description: Expand on features, offline capability, free with no ads
+   - Category: Game > Board
+   - Content rating: Everyone
+   - Privacy policy: `https://pointspad.com/privacy`
+5. Upload screenshots (phone + 7" tablet recommended)
+6. Create an **internal testing** track first
+7. After testing, promote to **production**
+
+#### Step 5: Post-Launch
+
+- Monitor crash reports in App Store Connect / Play Console
+- Respond to user reviews
+- Update app by pushing to git (Vercel redeploys → PWA updates automatically)
+- App store packages only need rebuilding for native changes (icon, splash screen, etc.)
+- For content/feature updates, just push to git — the PWA inside the wrapper fetches from your Vercel URL

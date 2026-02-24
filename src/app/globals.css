@@ -126,3 +126,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Marketing page animations */
+@keyframes pp-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pp-count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pp-bar-grow {
+  from { width: 0%; }
+}
+
+@keyframes pp-fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pp-slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pp-scale-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.pp-animate-count { animation: pp-count-up 0.6s ease-out both; }
+.pp-animate-bar { animation: pp-bar-grow 1s ease-out both; }
+.pp-animate-fade-up { animation: pp-fade-in-up 0.5s ease-out both; }
+.pp-animate-slide-right { animation: pp-slide-in-right 0.5s ease-out both; }
+.pp-animate-scale { animation: pp-scale-in 0.4s ease-out both; }
