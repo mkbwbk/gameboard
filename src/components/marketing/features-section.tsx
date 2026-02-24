@@ -1,38 +1,15 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
 import { Gamepad2, Target, BarChart3, WifiOff } from 'lucide-react';
-import { DEFAULT_GAMES } from '@/lib/constants/games';
 
-const gameEmojis = DEFAULT_GAMES.slice(0, 20).map((g) => g.icon);
+const gameEmojis = ['🎲', '♟️', '⬛', '⚫', '🔴', '🔤', '🎯', '🧵', '🦅', '🚂', '🏝️', '🏰', '🪐', '🔷', '🏛️', '💎', '👑', '⚔️', '🦊', '🐻'];
 
 function AnimatedBar({ name, pct, color, delay }: { name: string; pct: number; color: string; delay: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setWidth(pct), delay);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [pct, delay]);
-
   return (
-    <div ref={ref} className="flex items-center gap-2 text-xs">
+    <div className="flex items-center gap-2 text-xs">
       <span className="w-12 text-slate-400 font-medium">{name}</span>
       <div className="flex-1 h-2.5 bg-white/5 rounded-full overflow-hidden">
         <div
-          className={`h-full bg-gradient-to-r ${color} rounded-full transition-all duration-1000 ease-out`}
-          style={{ width: `${width}%` }}
+          className={`h-full bg-gradient-to-r ${color} rounded-full pp-animate-bar`}
+          style={{ width: `${pct}%`, animationDelay: `${delay}ms` }}
         />
       </div>
       <span className="text-slate-400 w-9 text-right font-semibold">
@@ -43,35 +20,10 @@ function AnimatedBar({ name, pct, color, delay }: { name: string; pct: number; c
 }
 
 function FeatureCard({ feature, index }: { feature: typeof features[number]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div
-      ref={ref}
-      className="group rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out, background-color 0.3s, border-color 0.3s',
-        transitionDelay: `${index * 100}ms`,
-      }}
+      className="group rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300 pp-animate-fade-up"
+      style={{ animationDelay: `${index * 100}ms` }}
     >
       <div
         className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 border ${feature.iconColor}`}
@@ -183,10 +135,10 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="relative py-20 sm:py-28">
+    <section id="features" className="relative py-20 sm:py-28 overflow-hidden">
       {/* Background accent */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-indigo-600/5 rounded-full blur-[120px] -translate-y-1/2 -z-10" />
-      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-violet-600/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-indigo-600/5 rounded-full blur-[120px] -translate-y-1/2 -z-10 hidden sm:block" />
+      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-violet-600/5 rounded-full blur-[100px] -z-10 hidden sm:block" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">

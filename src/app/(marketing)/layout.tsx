@@ -46,6 +46,6 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="dark bg-[#060612] min-h-screen text-white">{children}</div>
+    <div className="dark bg-[#060612] min-h-screen text-white overflow-x-hidden">{children}</div>
   );
 }

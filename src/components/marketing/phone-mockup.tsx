@@ -16,8 +16,8 @@ export function PhoneMockup({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* Glow effects behind phone */}
-      <div className="absolute -inset-8 -z-10 blur-3xl opacity-25 bg-gradient-to-br from-indigo-500 via-violet-600 to-purple-600 rounded-full" />
-      <div className="absolute -inset-4 -z-10 blur-2xl opacity-15 bg-indigo-500 rounded-full" />
+      <div className="absolute inset-0 -z-10 blur-3xl opacity-25 bg-gradient-to-br from-indigo-500 via-violet-600 to-purple-600 rounded-full scale-125" />
+      <div className="absolute inset-0 -z-10 blur-2xl opacity-15 bg-indigo-500 rounded-full scale-110" />
     </div>
   );
 }

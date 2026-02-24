@@ -1,16 +1,16 @@
 import { AppStoreBadges } from './app-store-badges';
-import { DEFAULT_GAMES } from '@/lib/constants/games';
 
-const emojis = DEFAULT_GAMES.slice(0, 8).map((g) => g.icon);
+const emojis = ['🎲', '♟️', '⬛', '🀄', '🎯', '♠️', '🏝️', '🐦'];
 
 export function FinalCtaSection() {
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden">
       {/* Rich background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-indigo-600/15 rounded-full blur-[140px]" />
-        <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] bg-violet-600/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[80px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent sm:hidden" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-indigo-600/15 rounded-full blur-[140px] hidden sm:block" />
+        <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] bg-violet-600/10 rounded-full blur-[100px] hidden sm:block" />
+        <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[80px] hidden sm:block" />
       </div>
 
       {/* Decorative scattered game emojis */}

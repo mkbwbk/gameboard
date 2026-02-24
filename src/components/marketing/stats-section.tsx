@@ -20,8 +20,8 @@ export function StatsSection() {
   return (
     <section id="stats" className="relative py-20 sm:py-28 overflow-hidden">
       {/* Background accents */}
-      <div className="absolute top-1/3 left-0 w-[600px] h-[600px] bg-indigo-600/8 rounded-full blur-[140px] -z-10" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-violet-600/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-1/3 left-0 w-[600px] h-[600px] bg-indigo-600/8 rounded-full blur-[140px] -z-10 hidden sm:block" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-violet-600/5 rounded-full blur-[100px] -z-10 hidden sm:block" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Stats mockup */}

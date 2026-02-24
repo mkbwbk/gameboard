@@ -1,54 +1,26 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { AppStoreBadges } from './app-store-badges';
 import { PhoneMockup } from './phone-mockup';
 
-function useCountUp(target: number, duration: number = 1200, delay: number = 0) {
-  const [value, setValue] = useState(0);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const start = performance.now();
-      const step = (now: number) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        setValue(Math.round(eased * target));
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [target, duration, delay]);
-  return value;
-}
-
 function AnimatedBar({ targetWidth, delay, color }: { targetWidth: number; delay: number; color: string }) {
-  const [width, setWidth] = useState(0);
-  useEffect(() => {
-    const timeout = setTimeout(() => setWidth(targetWidth), delay);
-    return () => clearTimeout(timeout);
-  }, [targetWidth, delay]);
   return (
     <div
-      className={`h-full ${color} rounded-full transition-all duration-1000 ease-out`}
-      style={{ width: `${width}%` }}
+      className={`h-full ${color} rounded-full pp-animate-bar`}
+      style={{ width: `${targetWidth}%`, animationDelay: `${delay}ms` }}
     />
   );
 }
 
 export function HeroSection() {
-  const gamesCount = useCountUp(24, 1000, 400);
-  const winRate = useCountUp(68, 1200, 600);
-  const playersCount = useCountUp(5, 800, 800);
-
   return (
     <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
       {/* Rich background with warm gradients */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[#060612]" />
-        <div className="absolute top-1/3 left-1/4 w-[700px] h-[700px] bg-indigo-600/20 rounded-full blur-[160px]" />
-        <div className="absolute -top-20 right-0 w-[500px] h-[500px] bg-violet-700/15 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/8 rounded-full blur-[100px]" />
+        {/* Simple gradient for mobile, full blur blobs for desktop */}
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/30 via-transparent to-transparent sm:hidden" />
+        <div className="absolute top-1/3 left-1/4 w-[700px] h-[700px] bg-indigo-600/20 rounded-full blur-[160px] hidden sm:block" />
+        <div className="absolute -top-20 right-0 w-[500px] h-[500px] bg-violet-700/15 rounded-full blur-[120px] hidden sm:block" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/8 rounded-full blur-[100px] hidden sm:block" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -96,7 +68,7 @@ export function HeroSection() {
           {/* Phone mockup column with animated game pieces */}
           <div className="relative flex justify-center lg:justify-end pp-animate-scale" style={{ animationDelay: '300ms' }}>
             {/* Animated floating info cards */}
-            <FloatingCard className="absolute -top-4 -left-2 sm:left-4 z-20" delay={0} enterDelay={800}>
+            <FloatingCard className="absolute -top-4 left-0 sm:left-4 z-20" delay={0} enterDelay={800}>
               <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-800/90 border border-slate-700/50 shadow-xl backdrop-blur-sm">
                 <span className="text-lg">🏆</span>
                 <div>
@@ -106,7 +78,7 @@ export function HeroSection() {
               </div>
             </FloatingCard>
 
-            <FloatingCard className="absolute top-16 -right-2 sm:right-2 z-20" delay={1.5} enterDelay={1000}>
+            <FloatingCard className="absolute top-16 right-0 sm:right-2 z-20" delay={1.5} enterDelay={1000}>
               <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-800/90 border border-slate-700/50 shadow-xl backdrop-blur-sm">
                 <span className="text-lg">🔥</span>
                 <div>
@@ -116,7 +88,7 @@ export function HeroSection() {
               </div>
             </FloatingCard>
 
-            <FloatingCard className="absolute bottom-24 -left-4 sm:left-0 z-20" delay={3} enterDelay={1200}>
+            <FloatingCard className="absolute bottom-24 left-0 sm:left-0 z-20" delay={3} enterDelay={1200}>
               <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-800/90 border border-slate-700/50 shadow-xl backdrop-blur-sm">
                 <span className="text-lg">⚔️</span>
                 <div>
@@ -126,7 +98,7 @@ export function HeroSection() {
               </div>
             </FloatingCard>
 
-            <FloatingCard className="absolute bottom-12 -right-4 sm:right-0 z-20" delay={4.5} enterDelay={1400}>
+            <FloatingCard className="absolute bottom-12 right-0 sm:right-0 z-20" delay={4.5} enterDelay={1400}>
               <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-800/90 border border-slate-700/50 shadow-xl backdrop-blur-sm">
                 <span className="text-lg">📊</span>
                 <div>
@@ -146,18 +118,18 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* Animated stats row */}
+                {/* Stats row */}
                 <div className="grid grid-cols-3 gap-1.5">
                   <div className="bg-gradient-to-br from-indigo-600/30 to-indigo-800/20 rounded-xl p-2 text-center border border-indigo-500/20">
-                    <div className="text-indigo-300 font-bold text-base">{gamesCount}</div>
+                    <div className="text-indigo-300 font-bold text-base pp-animate-count" style={{ animationDelay: '400ms' }}>24</div>
                     <div className="text-indigo-400/60 text-[9px]">Games</div>
                   </div>
                   <div className="bg-gradient-to-br from-emerald-600/30 to-emerald-800/20 rounded-xl p-2 text-center border border-emerald-500/20">
-                    <div className="text-emerald-300 font-bold text-base">{winRate}%</div>
+                    <div className="text-emerald-300 font-bold text-base pp-animate-count" style={{ animationDelay: '600ms' }}>68%</div>
                     <div className="text-emerald-400/60 text-[9px]">Win Rate</div>
                   </div>
                   <div className="bg-gradient-to-br from-violet-600/30 to-violet-800/20 rounded-xl p-2 text-center border border-violet-500/20">
-                    <div className="text-violet-300 font-bold text-base">{playersCount}</div>
+                    <div className="text-violet-300 font-bold text-base pp-animate-count" style={{ animationDelay: '800ms' }}>5</div>
                     <div className="text-violet-400/60 text-[9px]">Players</div>
                   </div>
                 </div>
@@ -244,20 +216,11 @@ function FloatingCard({
   delay: number;
   enterDelay: number;
 }) {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const timeout = setTimeout(() => setVisible(true), enterDelay);
-    return () => clearTimeout(timeout);
-  }, [enterDelay]);
-
   return (
     <div
-      className={className}
+      className={`${className} pp-floating-card`}
       style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? undefined : 'translateY(10px) scale(0.95)',
-        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-        animation: visible ? `pp-float 6s ease-in-out ${delay}s infinite` : 'none',
+        animationDelay: `${enterDelay}ms, ${enterDelay + 500 + delay * 1000}ms`,
       }}
     >
       {children}
