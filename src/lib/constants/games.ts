@@ -26,7 +26,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🎲',
     config: { minPlayers: 2, maxPlayers: 2, targetScore: 3 },
     category: GameCategory.CLASSIC,
-    youtubeVideoId: 'NxBGIJTFhn0',
+    youtubeVideoId: 'xXE5AwzNQ2s',
     amazonUrl: amazonUrl('B0BWVMRQV3'),
   },
   {
@@ -44,7 +44,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '⬛',
     config: { minPlayers: 2, maxPlayers: 2, allowDraw: true },
     category: GameCategory.CLASSIC,
-    youtubeVideoId: 'ScKIdStCharQ',
+    youtubeVideoId: 'MOW9k_C4vFU',
     amazonUrl: amazonUrl('B08GGDNLZH'),
   },
   {
@@ -71,7 +71,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🔤',
     config: { minPlayers: 2, maxPlayers: 4 },
     category: GameCategory.CLASSIC,
-    youtubeVideoId: 'K1KCB0eObVs',
+    youtubeVideoId: 'swlg3vQXboE',
     amazonUrl: amazonUrl('B00IL5PH5C'),
   },
   {
@@ -80,7 +80,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🎯',
     config: { minPlayers: 2, maxPlayers: 8, lowestWins: true, targetScore: 501 },
     category: GameCategory.CLASSIC,
-    youtubeVideoId: 'Ey-0LfBRKhg',
+    youtubeVideoId: 'hjmC0b881q0',
     amazonUrl: amazonUrl('B08CVS6TZ1'),
   },
   {
@@ -89,7 +89,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🧵',
     config: { minPlayers: 2, maxPlayers: 2 },
     category: GameCategory.CLASSIC,
-    youtubeVideoId: 'o0MjhXsgYpg',
+    youtubeVideoId: 'cwJHmdbTWbg',
     amazonUrl: amazonUrl('B00RCCAPPE'),
   },
 
@@ -120,7 +120,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🏝️',
     config: { minPlayers: 3, maxPlayers: 4, targetScore: 10 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: 'DEny6m_both',
+    youtubeVideoId: '8Yj0Y3GKE40',
     amazonUrl: amazonUrl('B00U26V4VQ'),
   },
   {
@@ -129,7 +129,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🏰',
     config: { minPlayers: 2, maxPlayers: 5 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: '83qsiDSbb6I',
+    youtubeVideoId: 'gX8jFLUw8D4',
     amazonUrl: amazonUrl('B00NX627HW'),
   },
   {
@@ -165,7 +165,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '💎',
     config: { minPlayers: 2, maxPlayers: 4, targetScore: 15 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: 'pe_XBJp70O4',
+    youtubeVideoId: 'rue8-jvbc9I',
     amazonUrl: amazonUrl('B00IZEUFIA'),
   },
   {
@@ -183,7 +183,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '⚔️',
     config: { minPlayers: 1, maxPlayers: 5 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: 'ffMLIj4BqZ0',
+    youtubeVideoId: 'ffMLIL5qGQg',
     amazonUrl: amazonUrl('B01IPUGYK6'),
   },
   {
@@ -192,7 +192,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🦊',
     config: { minPlayers: 2, maxPlayers: 4, targetScore: 30 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: 'bFBiMdA-R6I',
+    youtubeVideoId: 'G08TDwBbV7o',
     amazonUrl: amazonUrl('B07MFNKY8K'),
   },
   {
@@ -201,8 +201,8 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🐻',
     config: { minPlayers: 1, maxPlayers: 4 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: 'yB2MmAjEWEY',
-    amazonUrl: amazonUrl('B09FH84VBH'),
+    youtubeVideoId: 'w-r_TekunQI',
+    amazonUrl: amazonUrl('B093H8RGXX'),
   },
   {
     name: 'Agricola',
@@ -210,7 +210,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🌾',
     config: { minPlayers: 1, maxPlayers: 4 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: 'RMkMNPHZqag',
+    youtubeVideoId: 'LWuUuxbMDB0',
     amazonUrl: amazonUrl('B00BFIM4MQ'),
   },
   {
@@ -219,7 +219,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🪨',
     config: { minPlayers: 2, maxPlayers: 4 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: 'Ht_Qv0bJwls',
+    youtubeVideoId: 'ltD3vYrrn_8',
     amazonUrl: amazonUrl('B0038O17RC'),
   },
   {
@@ -228,7 +228,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '👹',
     config: { minPlayers: 2, maxPlayers: 6, targetScore: 20 },
     category: GameCategory.STRATEGY,
-    youtubeVideoId: 'BIzKGRsnoGw',
+    youtubeVideoId: 'RWYGlPf6IzE',
     amazonUrl: amazonUrl('B004U5R5BI'),
   },
 
@@ -241,7 +241,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🪵',
     config: { minPlayers: 2, maxPlayers: 10 },
     category: GameCategory.PARTY,
-    youtubeVideoId: '3Qto6MkBFME',
+    youtubeVideoId: 'iO_lJEz3GGw',
     amazonUrl: amazonUrl('B00003GCYJ'),
   },
   {
@@ -250,7 +250,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🐱',
     config: { minPlayers: 2, maxPlayers: 5 },
     category: GameCategory.PARTY,
-    youtubeVideoId: 'kOGsnKFeRRc',
+    youtubeVideoId: 'kAkRKuv5Rts',
     amazonUrl: amazonUrl('B010TQY7A8'),
   },
   {
@@ -268,7 +268,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '💌',
     config: { minPlayers: 2, maxPlayers: 6, targetScore: 7 },
     category: GameCategory.PARTY,
-    youtubeVideoId: '1VlJRqFXvCE',
+    youtubeVideoId: 'RiQ2To5KWJM',
     amazonUrl: amazonUrl('B07N4K6DSG'),
   },
   {
@@ -277,7 +277,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🦎',
     config: { minPlayers: 3, maxPlayers: 8 },
     category: GameCategory.PARTY,
-    youtubeVideoId: '60bwPPBOcb0',
+    youtubeVideoId: 'Tgn2W4KIanY',
     amazonUrl: amazonUrl('B073JQKF1P'),
   },
   {
@@ -286,7 +286,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🍣',
     config: { minPlayers: 2, maxPlayers: 5 },
     category: GameCategory.PARTY,
-    youtubeVideoId: 'Xu2SqtMuyaQ',
+    youtubeVideoId: 'oIutqhJTUgc',
     amazonUrl: amazonUrl('B00J57VU44'),
   },
 
@@ -299,8 +299,8 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🏠',
     config: { minPlayers: 2, maxPlayers: 8 },
     category: GameCategory.FAMILY,
-    youtubeVideoId: '4Hfe97Q5kuI',
-    amazonUrl: amazonUrl('B09FH84VBH'),
+    youtubeVideoId: '4nz-_hvFw44',
+    amazonUrl: amazonUrl('B0DN37BBGD'),
   },
   {
     name: 'Monopoly Deal',
@@ -308,7 +308,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '💰',
     config: { minPlayers: 2, maxPlayers: 5 },
     category: GameCategory.FAMILY,
-    youtubeVideoId: 'skHNGr6wfUE',
+    youtubeVideoId: 'Gc0XrTjmCV8',
     amazonUrl: amazonUrl('B00NQQTZCO'),
   },
   {
@@ -317,7 +317,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🔍',
     config: { minPlayers: 2, maxPlayers: 6 },
     category: GameCategory.FAMILY,
-    youtubeVideoId: 'pTCGnWt_uRY',
+    youtubeVideoId: '5DGy0GBbMyA',
     amazonUrl: amazonUrl('B08DV6KZ9H'),
   },
   {
@@ -326,7 +326,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🃏',
     config: { minPlayers: 2, maxPlayers: 12 },
     category: GameCategory.FAMILY,
-    youtubeVideoId: 'Pt06wSCjBSY',
+    youtubeVideoId: 'LDttsej2d9o',
     amazonUrl: amazonUrl('B00DIACENI'),
   },
   {
@@ -335,7 +335,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🟥',
     config: { minPlayers: 2, maxPlayers: 10 },
     category: GameCategory.FAMILY,
-    youtubeVideoId: 'XVg6JCMi4oU',
+    youtubeVideoId: 'sWoSZmHsCls',
     amazonUrl: amazonUrl('B005I5M2F8'),
   },
 
@@ -355,7 +355,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '💩',
     config: { minPlayers: 2, maxPlayers: 6, trackLastPlace: true },
     category: GameCategory.CARD_GAMES,
-    youtubeVideoId: 'sQQB2WFalLw',
+    youtubeVideoId: 'JZ_Qd5KTy3k',
   },
   {
     name: 'Gin Rummy',
@@ -363,7 +363,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🂡',
     config: { minPlayers: 2, maxPlayers: 2, targetScore: 100 },
     category: GameCategory.CARD_GAMES,
-    youtubeVideoId: 'yGfCA2PBJhM',
+    youtubeVideoId: 'Uy063oI9Gkk',
   },
   {
     name: 'Bridge',
@@ -371,7 +371,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🂮',
     config: { minPlayers: 4, maxPlayers: 4 },
     category: GameCategory.CARD_GAMES,
-    youtubeVideoId: 'bII6cMLfzXY',
+    youtubeVideoId: 'Arq3t0iHfPE',
   },
   {
     name: 'Poker',
@@ -379,7 +379,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '♠️',
     config: { minPlayers: 2, maxPlayers: 10 },
     category: GameCategory.CARD_GAMES,
-    youtubeVideoId: 'GAoR9ji8D6A',
+    youtubeVideoId: 'ep1riICX-KU',
     amazonUrl: amazonUrl('B09BNRJ6WY'),
   },
 
@@ -392,7 +392,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🧠',
     config: { minPlayers: 2, maxPlayers: 4 },
     category: GameCategory.COOPERATIVE,
-    youtubeVideoId: 'Mu3nKq2KRZY',
+    youtubeVideoId: 'uXl8MC0GMYE',
     amazonUrl: amazonUrl('B07C4WWZDW'),
   },
   {
@@ -401,7 +401,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🦠',
     config: { minPlayers: 2, maxPlayers: 4 },
     category: GameCategory.COOPERATIVE,
-    youtubeVideoId: 'ytK1zDPPDhc',
+    youtubeVideoId: 'ojkScPkdgsk',
     amazonUrl: amazonUrl('B00A2HD40E'),
   },
   {
@@ -410,7 +410,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🎆',
     config: { minPlayers: 2, maxPlayers: 5 },
     category: GameCategory.COOPERATIVE,
-    youtubeVideoId: 'dBK1T2t1jys',
+    youtubeVideoId: 'd_js_3S_7K8',
     amazonUrl: amazonUrl('B00CYQ54LI'),
   },
   {
@@ -419,7 +419,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🏝️',
     config: { minPlayers: 2, maxPlayers: 4 },
     category: GameCategory.COOPERATIVE,
-    youtubeVideoId: 'DxYToKdsn7c',
+    youtubeVideoId: 'S2GCP55_FOc',
     amazonUrl: amazonUrl('B003D7F4YY'),
   },
   {
@@ -437,7 +437,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '✈️',
     config: { minPlayers: 2, maxPlayers: 2 },
     category: GameCategory.COOPERATIVE,
-    youtubeVideoId: 'G3Prfn-g2iU',
+    youtubeVideoId: 'akX8WfuqUXo',
     amazonUrl: amazonUrl('B0CN85W67K'),
   },
 ];
