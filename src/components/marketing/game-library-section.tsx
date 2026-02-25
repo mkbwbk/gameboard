@@ -82,7 +82,7 @@ export function GameLibrarySection() {
             <Link
               key={game.name}
               href={`/game/${slugify(game.name)}`}
-              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-white/[0.1] transition-colors"
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] hover:border-white/[0.12] active:scale-[0.97] active:bg-white/[0.1] transition-all duration-150"
             >
               <span className="text-lg flex-shrink-0">{game.icon}</span>
               <span className="text-sm text-slate-300 truncate">
@@ -93,7 +93,7 @@ export function GameLibrarySection() {
           {/* Custom game card */}
           <Link
             href="/dashboard"
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-indigo-600/10 border border-indigo-500/20 hover:bg-indigo-600/15 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-indigo-600/10 border border-indigo-500/20 hover:bg-indigo-600/15 active:scale-[0.97] transition-all duration-150"
           >
             <span className="text-lg flex-shrink-0">➕</span>
             <span className="text-sm text-indigo-400 font-medium">

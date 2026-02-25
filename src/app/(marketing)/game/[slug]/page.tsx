@@ -484,7 +484,7 @@ export default async function GamePage({
                   <Link
                     key={g.name}
                     href={`/game/${slugify(g.name)}`}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-white/[0.1] transition-colors"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] hover:border-white/[0.12] active:scale-[0.97] active:bg-white/[0.1] transition-all duration-150"
                   >
                     <span className="text-xl flex-shrink-0">{g.icon}</span>
                     <span className="text-sm text-slate-300 truncate">{g.name}</span>
