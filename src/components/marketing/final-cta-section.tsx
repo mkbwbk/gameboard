@@ -37,7 +37,7 @@ export function FinalCtaSection() {
           </span>
         </h2>
         <p className="mt-4 text-lg text-slate-400 max-w-xl mx-auto">
-          Free forever. No account needed. Start tracking scores in seconds.
+          Free to download. No account needed. Start tracking scores in seconds.
         </p>
         <div className="mt-10 flex justify-center">
           <AppStoreBadges />

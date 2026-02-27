@@ -37,4 +37,5 @@ export interface Game {
   category?: GameCategory;
   youtubeVideoId?: string;
   amazonUrl?: string;
+  playTime?: string;
 }

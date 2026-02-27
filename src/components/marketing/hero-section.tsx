@@ -60,7 +60,7 @@ export function HeroSection() {
               </span>
             </p>
 
-            <div className="mt-10 pp-animate-fade-up" style={{ animationDelay: '600ms' }}>
+            <div id="download" className="mt-10 pp-animate-fade-up" style={{ animationDelay: '600ms' }}>
               <AppStoreBadges />
             </div>
           </div>

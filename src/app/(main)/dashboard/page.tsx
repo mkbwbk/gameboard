@@ -86,7 +86,7 @@ export default function DashboardPage() {
       <PageContainer>
         <EmptyState
           icon="🏆"
-          title="Welcome to GameBoard"
+          title="Welcome to Score Door"
           description="Start by adding players and playing your first game!"
         >
           <div className="flex gap-2">

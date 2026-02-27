@@ -9,12 +9,47 @@ import { useGames } from '@/lib/hooks/use-games';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/lib/db/database';
 import { useRouter } from 'next/navigation';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Plus, ArrowUpDown, Heart, Search } from 'lucide-react';
 import { GameCategory } from '@/lib/models/game';
+import type { Game } from '@/lib/models/game';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 type SortMode = 'alpha' | 'most_played';
+
+/** Extract the max duration (in minutes) from a playTime string like "60–120 min" → 120, "30 min" → 30 */
+function parsePlayTimeMax(playTime?: string): number | null {
+  if (!playTime) return null;
+  const numbers = playTime.match(/\d+/g);
+  if (!numbers || numbers.length === 0) return null;
+  return Math.max(...numbers.map(Number));
+}
+
+function matchesPlayerCount(game: Game, filter: string): boolean {
+  if (filter === 'any') return true;
+  const n = parseInt(filter, 10);
+  if (isNaN(n)) return true;
+  // "6+" means maxPlayers >= 6
+  if (filter === '6+') return game.config.maxPlayers >= 6;
+  return game.config.minPlayers <= n && game.config.maxPlayers >= n;
+}
+
+function matchesGameLength(game: Game, filter: string): boolean {
+  if (filter === 'any') return true;
+  const maxMin = parsePlayTimeMax(game.playTime);
+  if (maxMin === null) return filter === 'any';
+  if (filter === 'quick') return maxMin <= 30;
+  if (filter === 'medium') return maxMin > 30 && maxMin <= 60;
+  if (filter === 'long') return maxMin > 60;
+  return true;
+}
 
 const CATEGORIES = [
   { value: 'all', label: 'All' },
@@ -32,6 +67,8 @@ export default function GamesPage() {
   const [sort, setSort] = useState<SortMode>('alpha');
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
+  const [playerFilter, setPlayerFilter] = useState('any');
+  const [lengthFilter, setLengthFilter] = useState('any');
 
   // Get play counts per game
   const playCounts = useLiveQuery(async () => {
@@ -53,9 +90,11 @@ export default function GamesPage() {
     return sorted;
   };
 
-  // Filter by search
+  // Filter by search + player count + game length
   const searchFiltered = games.filter((g) =>
-    g.name.toLowerCase().includes(search.toLowerCase())
+    g.name.toLowerCase().includes(search.toLowerCase()) &&
+    matchesPlayerCount(g, playerFilter) &&
+    matchesGameLength(g, lengthFilter)
   );
 
   // Favourites (always shown at top, unaffected by category filter)
@@ -100,6 +139,34 @@ export default function GamesPage() {
             {cat.label}
           </button>
         ))}
+      </div>
+
+      {/* Player count + game length filters */}
+      <div className="flex gap-2 mb-3">
+        <Select value={playerFilter} onValueChange={setPlayerFilter}>
+          <SelectTrigger size="sm" className="text-xs">
+            <SelectValue placeholder="Players" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="any">Any Players</SelectItem>
+            <SelectItem value="2">2 players</SelectItem>
+            <SelectItem value="3">3 players</SelectItem>
+            <SelectItem value="4">4 players</SelectItem>
+            <SelectItem value="5">5 players</SelectItem>
+            <SelectItem value="6+">6+ players</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={lengthFilter} onValueChange={setLengthFilter}>
+          <SelectTrigger size="sm" className="text-xs">
+            <SelectValue placeholder="Game Length" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="any">Any Length</SelectItem>
+            <SelectItem value="quick">Quick (&lt; 30 min)</SelectItem>
+            <SelectItem value="medium">Medium (30–60 min)</SelectItem>
+            <SelectItem value="long">Long (60+ min)</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Sort + count + create */}

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — Points Pad',
-  description: 'Privacy policy for the Points Pad board game score tracking app.',
+  title: 'Privacy Policy — Score Door',
+  description: 'Privacy policy for the Score Door board game score tracking app.',
 };
 
 export default function PrivacyPage() {
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
               The Short Version
             </h2>
             <p>
-              Points Pad stores all your data locally on your device. We don&apos;t
+              Score Door stores all your data locally on your device. We don&apos;t
               collect, transmit, or store any personal information on our servers.
               We have no servers. Your data is yours.
             </p>
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
               Data Collection
             </h2>
             <p>
-              Points Pad does not collect any personal data. We do not use
+              Score Door does not collect any personal data. We do not use
               analytics, tracking pixels, cookies, or any form of user monitoring.
               We do not have access to your game data, player names, scores, or
               any other information you enter into the app.
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
             <p>
               The app includes optional links to YouTube (for game tutorials) and
               Amazon (for game purchases). These links open in your browser and
-              are subject to those services&apos; own privacy policies. Points Pad does
+              are subject to those services&apos; own privacy policies. Score Door does
               not share any data with these services.
             </p>
           </section>
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
               Children&apos;s Privacy
             </h2>
             <p>
-              Points Pad is suitable for all ages. Since we do not collect any
+              Score Door is suitable for all ages. Since we do not collect any
               personal information, there are no special concerns regarding
               children&apos;s privacy.
             </p>
@@ -111,7 +111,7 @@ export default function PrivacyPage() {
             </h2>
             <p>
               If we make changes to this privacy policy, we will update the
-              &quot;Last updated&quot; date above. Since Points Pad stores no user data
+              &quot;Last updated&quot; date above. Since Score Door stores no user data
               on external servers, changes are unlikely.
             </p>
           </section>

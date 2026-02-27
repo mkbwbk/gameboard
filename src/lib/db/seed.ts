@@ -39,8 +39,9 @@ async function doSeed() {
     const youtubeChanged = existing.youtubeVideoId !== def.youtubeVideoId;
     const amazonChanged = existing.amazonUrl !== def.amazonUrl;
     const iconChanged = existing.icon !== def.icon;
+    const playTimeChanged = existing.playTime !== def.playTime;
 
-    if (configChanged || scoringChanged || categoryChanged || youtubeChanged || amazonChanged || iconChanged) {
+    if (configChanged || scoringChanged || categoryChanged || youtubeChanged || amazonChanged || iconChanged || playTimeChanged) {
       await db.games.update(existing.id, {
         config: def.config,
         scoringType: def.scoringType,
@@ -48,6 +49,7 @@ async function doSeed() {
         category: def.category,
         youtubeVideoId: def.youtubeVideoId,
         amazonUrl: def.amazonUrl,
+        playTime: def.playTime,
       });
     }
   }

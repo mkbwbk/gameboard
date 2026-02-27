@@ -1,6 +1,6 @@
-# Points Pad
+# Score Door
 
-Board game score tracking PWA for tracking games played with friends. Rebranded from "GameBoard" to **Points Pad**.
+Board game score tracking app for tracking games played with friends. Available on iOS & Android via app stores. Marketing site at **scoredoor.app**. Rebranded from "GameBoard" → "Points Pad" → **Score Door**.
 
 ## Tech Stack
 
@@ -33,8 +33,8 @@ src/
       session/                # Score recording flow (new → active → complete)
       history/                # Past sessions
       settings/               # App settings
-    layout.tsx                # Root layout (metadataBase: pointspad.com)
-    manifest.ts               # PWA manifest (Points Pad)
+    layout.tsx                # Root layout (metadataBase: scoredoor.app)
+    manifest.ts               # PWA manifest (Score Door)
     sitemap.ts                # Sitemap with all game pages
   components/
     marketing/                # Marketing site components
@@ -49,7 +49,7 @@ src/
       marketing-nav.tsx       # Sticky nav with anchor links
       marketing-footer.tsx
       phone-mockup.tsx        # iPhone frame component
-      app-store-badges.tsx    # App Store + Google Play badges
+      app-store-badges.tsx    # App Store + Google Play badges (no web app button)
       animate-on-scroll.tsx   # IntersectionObserver animation wrapper
     ui/                       # shadcn/ui primitives
     scoring/                  # Scoring UI per type (race, round, win-loss, elo, etc.)
@@ -77,9 +77,11 @@ src/
 - **Scoring types:** Race, Round-based, Win/Loss, Final Score, ELO, Cooperative — each has its own scorer component in `components/scoring/` and a corresponding type in `lib/models/score.ts`.
 - **Models use string IDs** generated with nanoid.
 - **Components are client components** (`"use client"`) since data comes from IndexedDB.
-- **PWA:** Service worker at `public/sw.js` (cache name: `pointspad-v2`), manifest in `src/app/manifest.ts`. `start_url: '/dashboard'` so installed PWA bypasses marketing site.
+- **App store only:** No free web version. Marketing site at scoredoor.app drives users to App Store / Google Play. App routes still exist for PWABuilder wrapping.
+- **PWA:** Service worker at `public/sw.js` (cache name: `scoredoor-v1`), manifest in `src/app/manifest.ts`. `start_url: '/dashboard'` so installed PWA bypasses marketing site.
+- **IndexedDB:** Database name is intentionally kept as `'GameBoardDB'` in `src/lib/db/database.ts` to preserve existing user data. Do NOT change this string.
 - **Game slugs:** `slugify()` and `findGameBySlug()` in `lib/constants/games.ts`. URL pattern: `/game/{slug}` (e.g., `/game/catan`, `/game/wingspan`).
-- **CSS animations:** Marketing animations defined in `globals.css` with `pp-` prefix (pp-float, pp-fade-in-up, pp-scale-in, etc.). No framer-motion — pure CSS + IntersectionObserver.
+- **CSS animations:** Marketing animations defined in `globals.css` with `pp-` prefix (legacy from Points Pad era; pp-float, pp-fade-in-up, pp-scale-in, etc.). No framer-motion — pure CSS + IntersectionObserver.
 
 ## Style Guide
 
@@ -103,7 +105,7 @@ Full marketing/sales landing page built at `/` with 45 individual game landing p
 | SEO | JSON-LD (SoftwareApplication + FAQPage), Open Graph, per-page meta, sitemap with all game URLs, robots.txt. | ✅ COMPLETE |
 | Privacy Policy | Full privacy policy at `/privacy`. | ✅ COMPLETE |
 | Animations | Hero: count-up numbers, growing bars, staggered floating cards. Features: scroll-triggered card fade-in + bar growth. CSS-only with IntersectionObserver. | ✅ COMPLETE |
-| Rebrand | Renamed from GameBoard → Points Pad across manifest, sw.js, header, layout, metadata. | ✅ COMPLETE |
+| Rebrand | Renamed from GameBoard → Points Pad → Score Door across manifest, sw.js, header, layout, metadata. | ✅ COMPLETE |
 | App Store Badges | Apple App Store + Google Play placeholder badges with correct logos. | ✅ COMPLETE |
 
 ### Key Marketing Files
@@ -160,7 +162,7 @@ Improvements made to the marketing/sales site for SEO and UX.
 | SEO Cleanup | Removed `/dashboard` from sitemap (private app route). Added `Disallow` rules in `robots.txt` for all app routes (`/dashboard`, `/games`, `/players`, `/history`, `/session`, `/settings`). | ✅ COMPLETE |
 | PWA Isolation | Changed `start_url` from `/` to `/dashboard` in manifest so installed PWA opens to app, not marketing site. Updated SW to v2: removed `/` from pre-cache, offline fallback to `/dashboard`. | ✅ COMPLETE |
 | Seed Deduplication | Fixed React StrictMode double-seed bug that created duplicate games in dev. Module-level promise guard in `seed.ts`. | ✅ COMPLETE |
-| Rebrand Cleanup | Changed "Loading GameBoard..." → "Loading Points Pad..." in `db-provider.tsx`. | ✅ COMPLETE |
+| Rebrand Cleanup | Changed "Loading GameBoard..." → "Loading Score Door..." in `db-provider.tsx`. | ✅ COMPLETE |
 
 ### Key Files Changed
 
@@ -181,11 +183,11 @@ Improvements made to the marketing/sales site for SEO and UX.
 
 1. **Verify & Fix YouTube Video IDs** — IDs in `src/lib/constants/games.ts` are best-effort. Verify each `youtubeVideoId` loads a relevant tutorial. Search YouTube for "how to play {game name}" to find correct IDs.
 
-2. **Verify & Fix Amazon ASINs** — ASINs in `src/lib/constants/games.ts` are best-effort. Verify each `amazonUrl` loads the correct product. The `amazonUrl(asin)` helper builds `https://www.amazon.com/dp/{ASIN}?tag=gameboard-20`.
+2. **Verify & Fix Amazon ASINs** — ASINs in `src/lib/constants/games.ts` are best-effort. Verify each `amazonUrl` loads the correct product. The `amazonUrl(asin)` helper builds `https://www.amazon.com/dp/{ASIN}?tag=scoredoor-20`.
 
-3. **Update Amazon Affiliate Tag** — Currently placeholder `gameboard-20` in `src/lib/constants/games.ts` line 3. Replace with real Amazon Associates tag.
+3. **Update Amazon Affiliate Tag** — Currently placeholder `scoredoor-20` in `src/lib/constants/games.ts` line 3. Replace with real Amazon Associates tag when registered.
 
-4. **Generate 1024px App Icon** — Apple requires 1024×1024 PNG with no transparency. Source: `public/icons/icon.svg`. Use sharp-cli to generate.
+4. ~~**Generate 1024px App Icon**~~ — ✅ DONE. Generated at `public/icons/icon-1024.png` from `icon.svg`.
 
 5. ~~**Review Service Worker**~~ — ✅ DONE. SW updated to v2, pre-caches only app routes, offline fallback to `/dashboard`.
 
@@ -208,17 +210,17 @@ The marketing site and app are in the **same Next.js project** using route group
 - Service worker (v2) caches only app routes and falls back to `/dashboard` offline
 - `robots.txt` blocks crawlers from app routes; `sitemap.ts` only includes marketing pages
 
-**Web visitors** see the marketing site at `pointspad.com`. **PWA/app store users** see the app at `/dashboard`. Same domain, same deployment, completely separate experiences.
+**Web visitors** see the marketing site at `scoredoor.app`. **App store users** get the app via iOS App Store / Google Play (PWABuilder wraps the same `/dashboard` route). No free web version — marketing CTAs point to app store downloads.
 
 ### Deployment: How to Ship to Vercel
 
 1. Push to git → Vercel auto-deploys from the connected repo
-2. Verify at `https://pointspad.com`:
+2. Verify at `https://scoredoor.app`:
    - `/` shows marketing landing page
    - `/game/catan` shows game-specific page with scoring FAQs
    - `/dashboard` shows the app (after IndexedDB seeds)
    - `/manifest.webmanifest` shows `start_url: "/dashboard"`
-3. Test PWA install: Chrome > three-dot menu > "Install Points Pad" → should open to dashboard
+3. Test PWA install: Chrome > three-dot menu > "Install Score Door" → should open to dashboard
 
 ### App Store Submission: Step-by-Step
 
@@ -228,21 +230,21 @@ The marketing site and app are in the **same Next.js project** using route group
 |---|---|---|
 | Apple Developer account ($99/yr) | ❌ Needed | [developer.apple.com/programs](https://developer.apple.com/programs/) |
 | Google Play Console ($25 one-time) | ❌ Needed | [play.google.com/console](https://play.google.com/console/) |
-| Privacy policy URL | ✅ Ready | `https://pointspad.com/privacy` |
-| 1024×1024 app icon (no transparency) | ❌ Needed | Generate from `public/icons/icon.svg` with sharp-cli |
+| Privacy policy URL | ✅ Ready | `https://scoredoor.app/privacy` |
+| 1024×1024 app icon (no transparency) | ✅ Ready | `public/icons/icon-1024.png` |
 | App screenshots (iPhone + Android) | ❌ Needed | 6.7" iPhone (1290×2796), 5.5" iPhone (1242×2208), Android phone (1080×1920) |
-| App description & metadata | ✅ Draft | Name: "Points Pad - Score Tracker" |
+| App description & metadata | ✅ Draft | Name: "Score Door - Score Tracker" |
 
 #### Step 1: Deploy to Vercel
 ```bash
 git push origin main
 ```
-Verify the live site works at `pointspad.com`. Test the PWA install from Chrome.
+Verify the live site works at `scoredoor.app`. Test the PWA install from Chrome.
 
 #### Step 2: Generate App Packages with PWABuilder
 
 1. Go to [pwabuilder.com](https://www.pwabuilder.com/)
-2. Enter `https://pointspad.com`
+2. Enter `https://scoredoor.app`
 3. PWABuilder will read the manifest and validate the PWA
 4. Click **"Package for stores"**
 5. Download:
@@ -252,16 +254,16 @@ Verify the live site works at `pointspad.com`. Test the PWA install from Chrome.
 #### Step 3: iOS App Store (via TestFlight first)
 
 1. Open the PWABuilder-generated Xcode project
-2. Set the **Bundle Identifier** (e.g., `com.pointspad.app`)
+2. Set the **Bundle Identifier** (e.g., `app.scoredoor`)
 3. Set the **Team** to your Apple Developer account
 4. Update **Info.plist** with app name, version (1.0.0), and description
 5. Archive the build: **Product → Archive** in Xcode
 6. Upload to App Store Connect via **Distribute App → App Store Connect**
 7. In [App Store Connect](https://appstoreconnect.apple.com/):
-   - Create new app: "Points Pad - Score Tracker"
+   - Create new app: "Score Door - Score Tracker"
    - Category: Games > Board
    - Age rating: 4+ (no objectionable content)
-   - Privacy policy URL: `https://pointspad.com/privacy`
+   - Privacy policy URL: `https://scoredoor.app/privacy`
    - Upload screenshots (6.7" and 5.5" required)
    - Add keywords: `board game score tracker, scorekeeper, game night, score counter`
    - Submit TestFlight build for **internal testing** first
@@ -276,14 +278,14 @@ Verify the live site works at `pointspad.com`. Test the PWA install from Chrome.
 #### Step 4: Google Play Store
 
 1. Sign in to [Google Play Console](https://play.google.com/console/)
-2. Create new app: "Points Pad - Score Tracker"
+2. Create new app: "Score Door - Score Tracker"
 3. Upload the PWABuilder-generated AAB file
 4. Fill in store listing:
    - Short description (80 chars): "Track board game scores with 45+ games, stats & leaderboards"
    - Full description: Expand on features, offline capability, free with no ads
    - Category: Game > Board
    - Content rating: Everyone
-   - Privacy policy: `https://pointspad.com/privacy`
+   - Privacy policy: `https://scoredoor.app/privacy`
 5. Upload screenshots (phone + 7" tablet recommended)
 6. Create an **internal testing** track first
 7. After testing, promote to **production**

@@ -8,9 +8,9 @@ export function MarketingFooter() {
           {/* Logo */}
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-xs">
-              🎯
+              🚪
             </div>
-            <span className="font-semibold text-white">Points Pad</span>
+            <span className="font-semibold text-white">Score Door</span>
           </div>
 
           {/* Links */}
@@ -21,12 +21,12 @@ export function MarketingFooter() {
             >
               Privacy Policy
             </Link>
-            <Link
-              href="/dashboard"
+            <a
+              href="#download"
               className="hover:text-slate-300 transition-colors"
             >
-              Open App
-            </Link>
+              Download App
+            </a>
           </div>
 
           {/* Tagline */}
@@ -37,7 +37,7 @@ export function MarketingFooter() {
 
         <div className="mt-8 pt-6 border-t border-white/5 text-center">
           <p className="text-xs text-slate-600">
-            &copy; {new Date().getFullYear()} Points Pad. All rights reserved.
+            &copy; {new Date().getFullYear()} Score Door. All rights reserved.
           </p>
         </div>
       </div>

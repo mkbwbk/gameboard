@@ -36,9 +36,9 @@ export function MarketingNav() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-sm">
-              🎯
+              🚪
             </div>
-            <span className="font-bold text-lg text-white">Points Pad</span>
+            <span className="font-bold text-lg text-white">Score Door</span>
           </Link>
 
           {/* Desktop links */}
@@ -52,12 +52,12 @@ export function MarketingNav() {
                 {link.label}
               </a>
             ))}
-            <Link
-              href="/dashboard"
+            <a
+              href="#download"
               className="text-sm font-medium px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors"
             >
-              Open App
-            </Link>
+              Download App
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -84,12 +84,13 @@ export function MarketingNav() {
                 {link.label}
               </a>
             ))}
-            <Link
-              href="/dashboard"
+            <a
+              href="#download"
               className="block text-sm font-medium px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-center transition-colors"
+              onClick={() => setMobileOpen(false)}
             >
-              Open App
-            </Link>
+              Download App
+            </a>
           </div>
         </div>
       )}

@@ -1,4 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Full bleed background (no rounded corners for maskable) -->
   <rect width="512" height="512" fill="#6366f1"/>
-  <text x="256" y="300" text-anchor="middle" font-size="200" font-family="sans-serif">🏆</text>
+  <!-- Door frame - slightly smaller for safe zone -->
+  <rect x="168" y="112" width="176" height="288" rx="10" fill="#4f46e5" stroke="#818cf8" stroke-width="5"/>
+  <!-- Door panel -->
+  <rect x="178" y="122" width="156" height="268" rx="7" fill="#312e81"/>
+  <!-- Door panels (raised sections) -->
+  <rect x="194" y="140" width="124" height="88" rx="5" fill="#3730a3" stroke="#4338ca" stroke-width="2"/>
+  <rect x="194" y="246" width="124" height="88" rx="5" fill="#3730a3" stroke="#4338ca" stroke-width="2"/>
+  <!-- Door handle -->
+  <circle cx="306" cy="232" r="12" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+  <circle cx="306" cy="232" r="5" fill="#f59e0b"/>
+  <!-- Score numbers floating above door -->
+  <text x="210" y="100" font-family="system-ui, sans-serif" font-size="30" font-weight="bold" fill="#c7d2fe">10</text>
+  <text x="278" y="94" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#a5b4fc">7</text>
+  <text x="312" y="102" font-family="system-ui, sans-serif" font-size="28" font-weight="bold" fill="#c7d2fe">5</text>
+  <!-- Light glow from under door -->
+  <rect x="186" y="382" width="140" height="7" rx="3.5" fill="#fbbf24" opacity="0.6"/>
 </svg>

@@ -35,42 +35,42 @@ const scoringTypeInfo: Record<
     icon: Target,
     color: 'text-red-400 bg-red-400/10 border-red-400/20',
     description: 'Players race to be the first to reach a target score. The moment someone hits the goal, the game ends and they win.',
-    howItWorks: 'Set the target score, add players, and tap to increment scores during gameplay. Points Pad highlights who is closest to winning and announces the winner automatically.',
+    howItWorks: 'Set the target score, add players, and tap to increment scores during gameplay. Score Door highlights who is closest to winning and announces the winner automatically.',
   },
   [ScoringType.ROUND_BASED]: {
     label: 'Round-Based Scoring',
     icon: ListOrdered,
     color: 'text-amber-400 bg-amber-400/10 border-amber-400/20',
     description: 'Scores are tracked round by round, building a running total over multiple rounds of play.',
-    howItWorks: 'Enter scores after each round and Points Pad keeps running totals. Review the scorecard anytime to see round-by-round breakdowns and current standings.',
+    howItWorks: 'Enter scores after each round and Score Door keeps running totals. Review the scorecard anytime to see round-by-round breakdowns and current standings.',
   },
   [ScoringType.WIN_LOSS]: {
     label: 'Win/Loss Tracking',
     icon: Trophy,
     color: 'text-green-400 bg-green-400/10 border-green-400/20',
     description: 'Simple winner and loser tracking for games where the final result is all that matters.',
-    howItWorks: 'Just pick the winner (and optionally the last place finisher) after each game. Points Pad tracks win rates, streaks, and head-to-head records over time.',
+    howItWorks: 'Just pick the winner (and optionally the last place finisher) after each game. Score Door tracks win rates, streaks, and head-to-head records over time.',
   },
   [ScoringType.FINAL_SCORE]: {
     label: 'Final Score Comparison',
     icon: Hash,
     color: 'text-blue-400 bg-blue-400/10 border-blue-400/20',
     description: 'Each player tallies up their final score at the end of the game. The highest (or lowest) total wins.',
-    howItWorks: 'Enter each player\'s final score when the game ends. Points Pad compares totals, determines the winner, and tracks historical performance.',
+    howItWorks: 'Enter each player\'s final score when the game ends. Score Door compares totals, determines the winner, and tracks historical performance.',
   },
   [ScoringType.ELO]: {
     label: 'ELO Rating',
     icon: TrendingUp,
     color: 'text-violet-400 bg-violet-400/10 border-violet-400/20',
     description: 'A competitive skill-based rating system that adjusts after every game. Beat stronger opponents to climb faster.',
-    howItWorks: 'Record game results and Points Pad automatically calculates ELO ratings. Watch ratings rise and fall based on match results and opponent strength.',
+    howItWorks: 'Record game results and Score Door automatically calculates ELO ratings. Watch ratings rise and fall based on match results and opponent strength.',
   },
   [ScoringType.COOPERATIVE]: {
     label: 'Cooperative',
     icon: Users,
     color: 'text-pink-400 bg-pink-400/10 border-pink-400/20',
     description: 'Players work together as a team. Everyone wins or loses together based on the game outcome.',
-    howItWorks: 'Record whether the team won or lost each session. Points Pad tracks your group\'s win rate and performance history for cooperative games.',
+    howItWorks: 'Record whether the team won or lost each session. Score Door tracks your group\'s win rate and performance history for cooperative games.',
   },
 };
 
@@ -116,15 +116,15 @@ function generateFaqs(game: (typeof DEFAULT_GAMES)[number]) {
     a: applyTemplate(faq.a),
   }));
 
-  // Universal Points Pad FAQs
+  // Universal Score Door FAQs
   const universalFaqs = [
     {
-      q: `Is Points Pad free for tracking ${game.name} scores?`,
-      a: `Yes, Points Pad is completely free with no ads, no subscriptions, and no in-app purchases. Track unlimited ${game.name} games with full stats and analytics.`,
+      q: `Is Score Door free for tracking ${game.name} scores?`,
+      a: `Yes, Score Door is completely free with no ads, no subscriptions, and no in-app purchases. Track unlimited ${game.name} games with full stats and analytics.`,
     },
     {
-      q: `Does Points Pad work offline for ${game.name}?`,
-      a: `Yes, Points Pad works 100% offline. All your ${game.name} scores and stats are stored on your device. No internet connection needed during game night.`,
+      q: `Does Score Door work offline for ${game.name}?`,
+      a: `Yes, Score Door works 100% offline. All your ${game.name} scores and stats are stored on your device. No internet connection needed during game night.`,
     },
   ];
 
@@ -141,8 +141,8 @@ export async function generateMetadata({
   if (!game) return {};
 
   const scoring = scoringTypeInfo[game.scoringType];
-  const title = `${game.name} Score Tracker — Free ${scoring.label} Scorekeeper | Points Pad`;
-  const description = `Track ${game.name} scores with Points Pad. ${scoring.label} scoring for ${game.config.minPlayers}–${game.config.maxPlayers} players. Free, offline, no sign-up. Stats, leaderboards, and win tracking.`;
+  const title = `${game.name} Score Tracker — Free ${scoring.label} Scorekeeper | Score Door`;
+  const description = `Track ${game.name} scores with Score Door. ${scoring.label} scoring for ${game.config.minPlayers}–${game.config.maxPlayers} players. Free, offline, no sign-up. Stats, leaderboards, and win tracking.`;
 
   return {
     title,
@@ -159,8 +159,8 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: `https://pointspad.com/game/${slug}`,
-      siteName: 'Points Pad',
+      url: `https://scoredoor.app/game/${slug}`,
+      siteName: 'Score Door',
       images: [{ url: '/og-image.png', width: 1200, height: 630 }],
       type: 'article',
     },
@@ -193,10 +193,10 @@ export default async function GamePage({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: `Points Pad — ${game.name} Score Tracker`,
+    name: `Score Door — ${game.name} Score Tracker`,
     applicationCategory: 'GameApplication',
-    operatingSystem: 'iOS, Android, Web',
-    description: `Track ${game.name} scores with Points Pad. Free, offline score tracker with stats and leaderboards.`,
+    operatingSystem: 'iOS, Android',
+    description: `Track ${game.name} scores with Score Door. Free, offline score tracker with stats and leaderboards.`,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   };
 
@@ -260,6 +260,11 @@ export default async function GamePage({
                   <span className="text-sm text-slate-500">
                     {playerRange} players
                   </span>
+                  {game.playTime && (
+                    <span className="text-sm text-slate-500">
+                      {game.playTime}
+                    </span>
+                  )}
                   {game.config.targetScore && (
                     <span className="text-sm text-slate-500">
                       Target: {game.config.targetScore} pts
@@ -270,20 +275,20 @@ export default async function GamePage({
             </div>
 
             <p className="text-lg text-slate-400 leading-relaxed max-w-2xl">
-              Track your {game.name} scores effortlessly with Points Pad. Built-in {scoring.label.toLowerCase()} scoring
+              Track your {game.name} scores effortlessly with Score Door. Built-in {scoring.label.toLowerCase()} scoring
               for {playerRange} players with stats, leaderboards, and head-to-head rivalries.
               Free, offline, no sign-up required.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/dashboard"
+              <a
+                href="#download"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition-colors"
               >
                 <Gamepad2 className="h-4 w-4" />
-                Start Scoring {game.name}
+                Download Score Door
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </a>
               {game.amazonUrl && (
                 <a
                   href={game.amazonUrl}
@@ -338,13 +343,13 @@ export default async function GamePage({
                 )}
               </div>
 
-              {/* How to Use Points Pad */}
+              {/* How to Use Score Door */}
               <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 border text-indigo-400 bg-indigo-400/10 border-indigo-400/20">
                   <Gamepad2 className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">
-                  Scoring in Points Pad
+                  Scoring in Score Door
                 </h3>
                 <p className="text-sm text-slate-400 leading-relaxed mb-4">
                   {scoring.howItWorks}
@@ -352,7 +357,7 @@ export default async function GamePage({
                 <ol className="space-y-3">
                   <li className="flex items-start gap-3">
                     <span className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-xs font-bold text-indigo-400">1</span>
-                    <span className="text-sm text-slate-300">Open Points Pad and tap &quot;New Game&quot;</span>
+                    <span className="text-sm text-slate-300">Open Score Door and tap &quot;New Game&quot;</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-xs font-bold text-indigo-400">2</span>
@@ -402,7 +407,7 @@ export default async function GamePage({
               Track Your {game.name} Stats
             </h2>
             <p className="text-slate-400 mb-8 max-w-2xl">
-              Points Pad goes beyond simple score tracking. Get detailed analytics
+              Score Door goes beyond simple score tracking. Get detailed analytics
               for every {game.name} session you play.
             </p>
 
@@ -476,7 +481,7 @@ export default async function GamePage({
                 More {categoryLabels[game.category]} Games
               </h2>
               <p className="text-slate-400 mb-8">
-                Explore other {categoryLabels[game.category].toLowerCase()} games you can track with Points Pad.
+                Explore other {categoryLabels[game.category].toLowerCase()} games you can track with Score Door.
               </p>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -509,16 +514,16 @@ export default async function GamePage({
               </span>
             </h2>
             <p className="mt-4 text-lg text-slate-400">
-              Free forever. No account needed. Start tracking {game.name} scores in seconds.
+              Free to download. No account needed. Start tracking {game.name} scores in seconds.
             </p>
             <div className="mt-8 flex flex-col items-center gap-6">
-              <Link
-                href="/dashboard"
+              <a
+                href="#download"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-lg transition-colors"
               >
-                Start Scoring {game.name}
+                Download Score Door
                 <ArrowRight className="h-5 w-5" />
-              </Link>
+              </a>
               <AppStoreBadges />
             </div>
           </div>

@@ -6,7 +6,13 @@ type Theme = 'light' | 'dark';
 
 function getInitialTheme(): Theme {
   if (typeof window === 'undefined') return 'light';
-  const stored = localStorage.getItem('gameboard-theme') as Theme | null;
+  // Migrate from old localStorage key
+  const oldStored = localStorage.getItem('gameboard-theme');
+  if (oldStored) {
+    localStorage.setItem('scoredoor-theme', oldStored);
+    localStorage.removeItem('gameboard-theme');
+  }
+  const stored = localStorage.getItem('scoredoor-theme') as Theme | null;
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   return stored ?? (prefersDark ? 'dark' : 'light');
 }
@@ -24,7 +30,7 @@ export function useTheme() {
 
   function setTheme(t: Theme) {
     setThemeState(t);
-    localStorage.setItem('gameboard-theme', t);
+    localStorage.setItem('scoredoor-theme', t);
     document.documentElement.classList.toggle('dark', t === 'dark');
   }
 

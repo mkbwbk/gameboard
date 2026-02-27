@@ -7,4 +7,4 @@ Disallow: /history
 Disallow: /session
 Disallow: /settings
 
-Sitemap: https://pointspad.com/sitemap.xml
+Sitemap: https://scoredoor.app/sitemap.xml

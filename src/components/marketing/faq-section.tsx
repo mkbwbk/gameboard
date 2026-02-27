@@ -6,12 +6,12 @@ import { cn } from '@/lib/utils';
 
 const faqs = [
   {
-    q: 'Is Points Pad really free?',
+    q: 'Is Score Door really free?',
     a: 'Yes, completely free. No ads, no in-app purchases, no subscriptions. All features are available from day one.',
   },
   {
     q: 'Do I need to create an account?',
-    a: 'No. Points Pad works instantly with zero sign-up. Open the app and start tracking scores right away.',
+    a: 'No. Score Door works instantly with zero sign-up. Open the app and start tracking scores right away.',
   },
   {
     q: 'What if I lose my phone?',
@@ -27,11 +27,11 @@ const faqs = [
   },
   {
     q: 'What platforms is it available on?',
-    a: 'Points Pad is available on the web (any browser), iOS (App Store), and Android (Google Play). Your data stays on whichever device you use.',
+    a: 'Score Door is available on iOS (App Store) and Android (Google Play). Your data stays on whichever device you use.',
   },
   {
     q: 'How is this different from just using a notepad?',
-    a: 'Points Pad automatically tracks stats over time: win rates, leaderboards, head-to-head records, ELO ratings, and streaks. A notepad can\u2019t tell you who\u2019s really winning across 50 game nights.',
+    a: 'Score Door automatically tracks stats over time: win rates, leaderboards, head-to-head records, ELO ratings, and streaks. A notepad can\u2019t tell you who\u2019s really winning across 50 game nights.',
   },
 ];
 

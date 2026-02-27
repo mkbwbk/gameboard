@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export function AppStoreBadges() {
   return (
     <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -33,14 +31,6 @@ export function AppStoreBadges() {
           <div className="text-sm font-semibold text-white leading-tight">Google Play</div>
         </div>
       </a>
-
-      {/* Web app button */}
-      <Link
-        href="/dashboard"
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors shadow-lg shadow-indigo-600/25"
-      >
-        Try Web App — Free
-      </Link>
     </div>
   );
 }

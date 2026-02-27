@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pointspad-v2';
+const CACHE_NAME = 'scoredoor-v1';
 
 // Install: cache the app shell
 self.addEventListener('install', (event) => {

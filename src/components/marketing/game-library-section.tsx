@@ -91,15 +91,15 @@ export function GameLibrarySection() {
             </Link>
           ))}
           {/* Custom game card */}
-          <Link
-            href="/dashboard"
+          <a
+            href="#download"
             className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-indigo-600/10 border border-indigo-500/20 hover:bg-indigo-600/15 active:scale-[0.97] transition-all duration-150"
           >
             <span className="text-lg flex-shrink-0">➕</span>
             <span className="text-sm text-indigo-400 font-medium">
               Your Games
             </span>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

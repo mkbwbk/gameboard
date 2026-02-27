@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { DEFAULT_GAMES, slugify } from '@/lib/constants/games';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://pointspad.com';
+  const baseUrl = 'https://scoredoor.app';
 
   const gamePages: MetadataRoute.Sitemap = DEFAULT_GAMES.map((game) => ({
     url: `${baseUrl}/game/${slugify(game.name)}`,

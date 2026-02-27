@@ -89,7 +89,7 @@ export default function SettingsPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">About GameBoard</CardTitle>
+          <CardTitle className="text-base">About Score Door</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">

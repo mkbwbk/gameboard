@@ -97,6 +97,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ gameId: s
           <p>{scoringTypeDescriptions[game.scoringType]}</p>
           <div className="mt-3 space-y-1">
             <p>Players: {game.config.minPlayers}-{game.config.maxPlayers}</p>
+            {game.playTime && <p>Play time: {game.playTime}</p>}
             {game.config.targetScore && <p>Target score: {game.config.targetScore}</p>}
             {game.config.trackLastPlace && <p>Tracks last place</p>}
             {game.config.allowDraw && <p>Draws allowed</p>}

@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Points Pad - Score Tracker',
-    short_name: 'Points Pad',
+    name: 'Score Door - Score Tracker',
+    short_name: 'Score Door',
     description: 'Track board game and card game scores with friends. 45+ popular games, leaderboards, and stats.',
     start_url: '/dashboard',
     display: 'standalone',

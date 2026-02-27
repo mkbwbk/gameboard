@@ -64,7 +64,7 @@ export function ScoringTypesSection() {
             One App, Six Ways to Score
           </h2>
           <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
-            Every game scores differently. Points Pad adapts to each one automatically.
+            Every game scores differently. Score Door adapts to each one automatically.
           </p>
         </div>
 

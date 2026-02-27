@@ -4,13 +4,14 @@ import type { Game } from '@/lib/models/game';
 import type { GameSession } from '@/lib/models/session';
 import type { ScoreData } from '@/lib/models/score';
 
-class GameBoardDB extends Dexie {
+class ScoreDoorDB extends Dexie {
   players!: EntityTable<Player, 'id'>;
   games!: EntityTable<Game, 'id'>;
   sessions!: EntityTable<GameSession, 'id'>;
   scores!: EntityTable<ScoreData, 'id'>;
 
   constructor() {
+    // Keep original DB name to preserve existing user data in IndexedDB
     super('GameBoardDB');
     this.version(1).stores({
       players: 'id, name, createdAt',
@@ -24,7 +25,13 @@ class GameBoardDB extends Dexie {
       sessions: 'id, gameId, status, startedAt, completedAt, *playerIds',
       scores: 'id, sessionId, type',
     });
+    this.version(3).stores({
+      players: 'id, name, createdAt',
+      games: 'id, name, scoringType, isCustom, isFavourite, category',
+      sessions: 'id, gameId, status, startedAt, completedAt, *playerIds',
+      scores: 'id, sessionId, type',
+    });
   }
 }
 
-export const db = new GameBoardDB();
+export const db = new ScoreDoorDB();

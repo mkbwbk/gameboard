@@ -19,7 +19,7 @@ function getTitle(pathname: string): string {
     if (pathname.startsWith(path)) return title;
   }
   if (pathname.startsWith('/session')) return 'Game Session';
-  return 'Points Pad';
+  return 'Score Door';
 }
 
 export function Header() {

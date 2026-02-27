@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Points Pad — Free Board Game Score Tracker',
+  title: 'Score Door — Board Game Score Tracker for iOS & Android',
   description:
-    'Track board game scores with 45+ games, ELO ratings, leaderboards, and stats. 100% offline, no account needed. Free for iOS, Android & web.',
+    'Track board game scores with 45+ games, ELO ratings, leaderboards, and stats. 100% offline, no account needed. Free for iOS & Android.',
   keywords: [
     'board game score tracker',
     'scorekeeper',
@@ -15,17 +15,17 @@ export const metadata: Metadata = {
     'board game companion',
   ],
   openGraph: {
-    title: 'Points Pad — Free Board Game Score Tracker',
+    title: 'Score Door — Board Game Score Tracker for iOS & Android',
     description:
       'Track scores, stats, and rivalries across 45+ board games. Free, offline, no sign-up.',
-    url: 'https://pointspad.com',
-    siteName: 'Points Pad',
+    url: 'https://scoredoor.app',
+    siteName: 'Score Door',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Points Pad — Board Game Score Tracker',
+        alt: 'Score Door — Board Game Score Tracker',
       },
     ],
     locale: 'en_US',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Points Pad — Free Board Game Score Tracker',
+    title: 'Score Door — Board Game Score Tracker for iOS & Android',
     description:
       'Track scores, stats, and rivalries across 45+ board games. Free, offline, no sign-up.',
     images: ['/og-image.png'],

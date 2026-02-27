@@ -13,9 +13,9 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'Points Pad',
+  name: 'Score Door',
   applicationCategory: 'GameApplication',
-  operatingSystem: 'iOS, Android, Web',
+  operatingSystem: 'iOS, Android',
   description:
     'Board game score tracker with 45+ games, ELO ratings, leaderboards, and stats. 100% offline, no account needed.',
   offers: {

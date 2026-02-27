@@ -31,6 +31,7 @@ export function GameCard({ game, onClick, badge, onToggleFavourite }: GameCardPr
         <div className="flex items-center gap-2">
           <p className="text-xs text-muted-foreground">
             {game.config.minPlayers}-{game.config.maxPlayers} players
+            {game.playTime && ` · ${game.playTime}`}
           </p>
           {badge && <p className="text-xs text-muted-foreground">· {badge}</p>}
         </div>
@@ -53,7 +54,7 @@ export function GameCard({ game, onClick, badge, onToggleFavourite }: GameCardPr
           />
         </button>
       )}
-      <Badge variant="secondary" className="shrink-0">
+      <Badge variant="secondary" className="shrink-0 min-w-[4.5rem] text-center justify-center">
         {scoringTypeLabels[game.scoringType] ?? game.scoringType}
       </Badge>
     </button>

@@ -1,6 +1,6 @@
 import { ScoringType, type GameConfig, GameCategory } from '@/lib/models/game';
 
-export const AFFILIATE_TAG = 'gameboard-20';
+export const AFFILIATE_TAG = 'scoredoor-20';
 
 export function slugify(name: string): string {
   return name
@@ -21,6 +21,7 @@ interface DefaultGameDef {
   category: GameCategory;
   youtubeVideoId?: string;
   amazonUrl?: string;
+  playTime?: string;
 }
 
 function amazonUrl(asin: string): string {
@@ -39,6 +40,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'xXE5AwzNQ2s',
     amazonUrl: amazonUrl('B0BWVMRQV3'),
+    playTime: '30 min',
   },
   {
     name: 'Chess',
@@ -48,6 +50,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'NAIQyoPcjNM',
     amazonUrl: amazonUrl('B07B6GF9GY'),
+    playTime: '30–60 min',
   },
   {
     name: 'Checkers',
@@ -57,6 +60,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'MOW9k_C4vFU',
     amazonUrl: amazonUrl('B08GGDNLZH'),
+    playTime: '20 min',
   },
   {
     name: 'Go',
@@ -66,6 +70,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'Jq5SObMdV3o',
     amazonUrl: amazonUrl('B07K76MN2P'),
+    playTime: '30–90 min',
   },
   {
     name: 'Connect 4',
@@ -75,6 +80,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'utXzIFEVPjA',
     amazonUrl: amazonUrl('B09BMPJKP8'),
+    playTime: '10 min',
   },
   {
     name: 'Scrabble',
@@ -84,6 +90,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'swlg3vQXboE',
     amazonUrl: amazonUrl('B00IL5PH5C'),
+    playTime: '60–90 min',
   },
   {
     name: 'Darts',
@@ -93,6 +100,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'hjmC0b881q0',
     amazonUrl: amazonUrl('B08CVS6TZ1'),
+    playTime: '20–30 min',
   },
   {
     name: 'Patchwork',
@@ -102,6 +110,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'cwJHmdbTWbg',
     amazonUrl: amazonUrl('B00RCCAPPE'),
+    playTime: '30 min',
   },
 
   // ──────────────────────────────────────────
@@ -115,6 +124,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'lgDgcLI2B0U',
     amazonUrl: amazonUrl('B07YQ1XHJR'),
+    playTime: '40–70 min',
   },
   {
     name: 'Ticket to Ride',
@@ -124,6 +134,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: '4JhFhyvGdik',
     amazonUrl: amazonUrl('B0002TV2LU'),
+    playTime: '30–60 min',
   },
   {
     name: 'Catan',
@@ -133,6 +144,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: '8Yj0Y3GKE40',
     amazonUrl: amazonUrl('B00U26V4VQ'),
+    playTime: '60–120 min',
   },
   {
     name: 'Carcassonne',
@@ -142,6 +154,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'gX8jFLUw8D4',
     amazonUrl: amazonUrl('B00NX627HW'),
+    playTime: '30–45 min',
   },
   {
     name: 'Terraforming Mars',
@@ -151,6 +164,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'n3yVpsiVwL8',
     amazonUrl: amazonUrl('B01GSYA4K2'),
+    playTime: '120 min',
   },
   {
     name: 'Azul',
@@ -160,6 +174,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'csJL-78NEPQ',
     amazonUrl: amazonUrl('B077MZ2MPH'),
+    playTime: '30–45 min',
   },
   {
     name: '7 Wonders',
@@ -169,6 +184,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'z_Wfdn5Es8U',
     amazonUrl: amazonUrl('B08C2TNG8S'),
+    playTime: '30 min',
   },
   {
     name: 'Splendor',
@@ -178,6 +194,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'rue8-jvbc9I',
     amazonUrl: amazonUrl('B00IZEUFIA'),
+    playTime: '30 min',
   },
   {
     name: 'Dominion',
@@ -187,6 +204,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: '5jNGpgdMums',
     amazonUrl: amazonUrl('B001JQY6P4'),
+    playTime: '30 min',
   },
   {
     name: 'Scythe',
@@ -196,6 +214,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'ffMLIL5qGQg',
     amazonUrl: amazonUrl('B01IPUGYK6'),
+    playTime: '90–115 min',
   },
   {
     name: 'Root',
@@ -205,6 +224,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'G08TDwBbV7o',
     amazonUrl: amazonUrl('B07MFNKY8K'),
+    playTime: '60–90 min',
   },
   {
     name: 'Cascadia',
@@ -214,6 +234,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'w-r_TekunQI',
     amazonUrl: amazonUrl('B093H8RGXX'),
+    playTime: '30–45 min',
   },
   {
     name: 'Agricola',
@@ -223,6 +244,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'LWuUuxbMDB0',
     amazonUrl: amazonUrl('B00BFIM4MQ'),
+    playTime: '30–120 min',
   },
   {
     name: 'Stone Age',
@@ -232,6 +254,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'ltD3vYrrn_8',
     amazonUrl: amazonUrl('B0038O17RC'),
+    playTime: '60–90 min',
   },
   {
     name: 'King of Tokyo',
@@ -241,6 +264,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.STRATEGY,
     youtubeVideoId: 'RWYGlPf6IzE',
     amazonUrl: amazonUrl('B004U5R5BI'),
+    playTime: '30 min',
   },
 
   // ──────────────────────────────────────────
@@ -254,6 +278,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.PARTY,
     youtubeVideoId: 'iO_lJEz3GGw',
     amazonUrl: amazonUrl('B00003GCYJ'),
+    playTime: '15 min',
   },
   {
     name: 'Exploding Kittens',
@@ -263,6 +288,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.PARTY,
     youtubeVideoId: 'kAkRKuv5Rts',
     amazonUrl: amazonUrl('B010TQY7A8'),
+    playTime: '15 min',
   },
   {
     name: 'Codenames',
@@ -272,6 +298,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.PARTY,
     youtubeVideoId: 'J8RWBooJivg',
     amazonUrl: amazonUrl('B014Q1XX9S'),
+    playTime: '15 min',
   },
   {
     name: 'Love Letter',
@@ -281,6 +308,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.PARTY,
     youtubeVideoId: 'RiQ2To5KWJM',
     amazonUrl: amazonUrl('B07N4K6DSG'),
+    playTime: '20 min',
   },
   {
     name: 'The Chameleon',
@@ -290,6 +318,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.PARTY,
     youtubeVideoId: 'Tgn2W4KIanY',
     amazonUrl: amazonUrl('B073JQKF1P'),
+    playTime: '15 min',
   },
   {
     name: 'Sushi Go',
@@ -299,6 +328,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.PARTY,
     youtubeVideoId: 'oIutqhJTUgc',
     amazonUrl: amazonUrl('B00J57VU44'),
+    playTime: '15 min',
   },
 
   // ──────────────────────────────────────────
@@ -312,6 +342,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.FAMILY,
     youtubeVideoId: '4nz-_hvFw44',
     amazonUrl: amazonUrl('B0DN37BBGD'),
+    playTime: '60–180 min',
   },
   {
     name: 'Monopoly Deal',
@@ -321,6 +352,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.FAMILY,
     youtubeVideoId: 'Gc0XrTjmCV8',
     amazonUrl: amazonUrl('B00NQQTZCO'),
+    playTime: '15 min',
   },
   {
     name: 'Clue',
@@ -330,6 +362,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.FAMILY,
     youtubeVideoId: '5DGy0GBbMyA',
     amazonUrl: amazonUrl('B08DV6KZ9H'),
+    playTime: '45 min',
   },
   {
     name: 'Sequence',
@@ -339,6 +372,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.FAMILY,
     youtubeVideoId: 'LDttsej2d9o',
     amazonUrl: amazonUrl('B00DIACENI'),
+    playTime: '30 min',
   },
   {
     name: 'UNO',
@@ -348,6 +382,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.FAMILY,
     youtubeVideoId: 'sWoSZmHsCls',
     amazonUrl: amazonUrl('B005I5M2F8'),
+    playTime: '30 min',
   },
 
   // ──────────────────────────────────────────
@@ -359,6 +394,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🃏',
     config: { minPlayers: 2, maxPlayers: 8, lowestWins: false, targetScore: 200 },
     category: GameCategory.CARD_GAMES,
+    playTime: '15 min',
   },
   {
     name: 'Palace',
@@ -367,6 +403,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     config: { minPlayers: 2, maxPlayers: 6, trackLastPlace: true },
     category: GameCategory.CARD_GAMES,
     youtubeVideoId: 'JZ_Qd5KTy3k',
+    playTime: '20 min',
   },
   {
     name: 'Gin Rummy',
@@ -375,6 +412,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     config: { minPlayers: 2, maxPlayers: 2, targetScore: 100 },
     category: GameCategory.CARD_GAMES,
     youtubeVideoId: 'Uy063oI9Gkk',
+    playTime: '30 min',
   },
   {
     name: 'Bridge',
@@ -383,6 +421,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     config: { minPlayers: 4, maxPlayers: 4 },
     category: GameCategory.CARD_GAMES,
     youtubeVideoId: 'Arq3t0iHfPE',
+    playTime: '60 min',
   },
   {
     name: 'Poker',
@@ -392,6 +431,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.CARD_GAMES,
     youtubeVideoId: 'ep1riICX-KU',
     amazonUrl: amazonUrl('B09BNRJ6WY'),
+    playTime: '60–120 min',
   },
 
   // ──────────────────────────────────────────
@@ -405,6 +445,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.COOPERATIVE,
     youtubeVideoId: 'uXl8MC0GMYE',
     amazonUrl: amazonUrl('B07C4WWZDW'),
+    playTime: '20 min',
   },
   {
     name: 'Pandemic',
@@ -414,6 +455,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.COOPERATIVE,
     youtubeVideoId: 'ojkScPkdgsk',
     amazonUrl: amazonUrl('B00A2HD40E'),
+    playTime: '45 min',
   },
   {
     name: 'Hanabi',
@@ -423,6 +465,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.COOPERATIVE,
     youtubeVideoId: 'd_js_3S_7K8',
     amazonUrl: amazonUrl('B00CYQ54LI'),
+    playTime: '25 min',
   },
   {
     name: 'Forbidden Island',
@@ -432,6 +475,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.COOPERATIVE,
     youtubeVideoId: 'S2GCP55_FOc',
     amazonUrl: amazonUrl('B003D7F4YY'),
+    playTime: '30 min',
   },
   {
     name: 'Gloomhaven',
@@ -441,6 +485,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.COOPERATIVE,
     youtubeVideoId: 'Uw7LI2esvp0',
     amazonUrl: amazonUrl('B01LZXVN4P'),
+    playTime: '60–120 min',
   },
   {
     name: 'Sky Team',
@@ -450,5 +495,6 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     category: GameCategory.COOPERATIVE,
     youtubeVideoId: 'akX8WfuqUXo',
     amazonUrl: amazonUrl('B0CN85W67K'),
+    playTime: '15 min',
   },
 ];
