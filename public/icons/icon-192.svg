@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="192" height="192">
-  <rect width="512" height="512" rx="108" fill="#6366f1"/>
-  <!-- Door frame -->
-  <rect x="152" y="96" width="208" height="320" rx="12" fill="#4f46e5" stroke="#818cf8" stroke-width="6"/>
-  <!-- Door panel -->
-  <rect x="164" y="108" width="180" height="296" rx="8" fill="#312e81"/>
-  <!-- Door panels (raised sections) -->
-  <rect x="184" y="128" width="140" height="100" rx="6" fill="#3730a3" stroke="#4338ca" stroke-width="2"/>
-  <rect x="184" y="248" width="140" height="100" rx="6" fill="#3730a3" stroke="#4338ca" stroke-width="2"/>
+  <!-- Dark background -->
+  <rect width="512" height="512" rx="108" fill="#0f172a"/>
+  <!-- Doorway opening (dark interior) -->
+  <rect x="128" y="96" width="220" height="320" rx="6" fill="#1e293b"/>
+  <!-- Score dots visible through the doorway -->
+  <circle cx="196" cy="168" r="20" fill="#8b5cf6"/>
+  <circle cx="196" cy="232" r="20" fill="#ec4899"/>
+  <circle cx="196" cy="296" r="20" fill="#f97316"/>
+  <circle cx="196" cy="360" r="20" fill="#22c55e"/>
+  <!-- Open door (hinged right, swinging left toward viewer) -->
+  <path d="M348 96 L348 416 L220 396 L220 116 Z" fill="#e2e8f0"/>
+  <!-- Door panel (upper) -->
+  <path d="M330 132 L330 238 L238 230 L238 142 Z" fill="#cbd5e1" opacity="0.6"/>
+  <!-- Door panel (lower) -->
+  <path d="M330 268 L330 374 L238 366 L238 278 Z" fill="#cbd5e1" opacity="0.6"/>
   <!-- Door handle -->
-  <circle cx="310" cy="256" r="14" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
-  <circle cx="310" cy="256" r="6" fill="#f59e0b"/>
-  <!-- Score numbers floating above door -->
-  <text x="200" y="80" font-family="system-ui, sans-serif" font-size="36" font-weight="bold" fill="#c7d2fe">10</text>
-  <text x="280" y="72" font-family="system-ui, sans-serif" font-size="28" font-weight="bold" fill="#a5b4fc">7</text>
-  <text x="320" y="84" font-family="system-ui, sans-serif" font-size="32" font-weight="bold" fill="#c7d2fe">5</text>
-  <!-- Light glow from under door -->
-  <rect x="172" y="396" width="168" height="8" rx="4" fill="#fbbf24" opacity="0.6"/>
+  <circle cx="250" cy="260" r="10" fill="#ffffff"/>
 </svg>
