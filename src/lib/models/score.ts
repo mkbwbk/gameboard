@@ -64,4 +64,17 @@ export interface CooperativeScore {
   notes?: string;
 }
 
-export type ScoreData = RaceScore | RoundBasedScore | WinLossScore | FinalScoreResult | EloScore | CooperativeScore;
+export interface TeamDefinition {
+  name: string;
+  playerIds: string[];
+}
+
+export interface TeamsScore {
+  id: string;
+  type: 'teams';
+  sessionId: string;
+  teams: TeamDefinition[];
+  winningTeamIndex: number;
+}
+
+export type ScoreData = RaceScore | RoundBasedScore | WinLossScore | FinalScoreResult | EloScore | CooperativeScore | TeamsScore;

@@ -1,6 +1,6 @@
 import { db } from '@/lib/db/database';
 import type { Player } from '@/lib/models/player';
-import type { ScoreData, WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloScore } from '@/lib/models/score';
+import type { ScoreData, WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloScore, TeamsScore } from '@/lib/models/score';
 import type { Game } from '@/lib/models/game';
 
 export interface LeaderboardEntry {
@@ -10,31 +10,37 @@ export interface LeaderboardEntry {
   winRate: number;
 }
 
-function getWinnerId(score: ScoreData, game: Game): string | null {
+function getWinnerIds(score: ScoreData, game: Game): string[] {
   switch (score.type) {
     case 'win_loss':
-      return (score as WinLossScore).winnerId;
+      return [(score as WinLossScore).winnerId];
     case 'final_score': {
       const s = score as FinalScoreResult;
       const sorted = Object.entries(s.scores).sort(([, a], [, b]) => b - a);
-      return sorted[0]?.[0] ?? null;
+      return sorted[0] ? [sorted[0][0]] : [];
     }
-    case 'race':
-      return (score as RaceScore).winnerId;
+    case 'race': {
+      const winnerId = (score as RaceScore).winnerId;
+      return winnerId ? [winnerId] : [];
+    }
     case 'round_based': {
       const s = score as RoundBasedScore;
       const sorted = Object.entries(s.finalTotals).sort(([, a], [, b]) =>
         game.config.lowestWins ? a - b : b - a
       );
-      return sorted[0]?.[0] ?? null;
+      return sorted[0] ? [sorted[0][0]] : [];
     }
     case 'elo': {
       const s = score as EloScore;
       const winner = Object.entries(s.playerResults).find(([, r]) => r.outcome === 'win');
-      return winner?.[0] ?? null;
+      return winner ? [winner[0]] : [];
+    }
+    case 'teams': {
+      const s = score as TeamsScore;
+      return s.teams[s.winningTeamIndex]?.playerIds ?? [];
     }
     default:
-      return null;
+      return [];
   }
 }
 
@@ -56,12 +62,12 @@ export async function computeLeaderboard(gameId?: string): Promise<LeaderboardEn
     const game = gameMap.get(session.gameId);
     if (!score || !game) continue;
 
-    const winnerId = getWinnerId(score, game);
+    const winners = getWinnerIds(score, game);
 
     for (const playerId of session.playerIds) {
       const stats = playerStats.get(playerId) ?? { played: 0, wins: 0 };
       stats.played++;
-      if (playerId === winnerId) stats.wins++;
+      if (winners.includes(playerId)) stats.wins++;
       playerStats.set(playerId, stats);
     }
   }

@@ -3,7 +3,7 @@
 import type { Player } from '@/lib/models/player';
 import type { Game } from '@/lib/models/game';
 import type { GameSession } from '@/lib/models/session';
-import type { ScoreData, RaceScore, RoundBasedScore, WinLossScore, FinalScoreResult, EloScore, CooperativeScore } from '@/lib/models/score';
+import type { ScoreData, RaceScore, RoundBasedScore, WinLossScore, FinalScoreResult, EloScore, CooperativeScore, TeamsScore, TeamDefinition } from '@/lib/models/score';
 import { ScoringType } from '@/lib/models/game';
 import { RaceScorer } from './race-scorer';
 import { RoundScorer } from './round-scorer';
@@ -11,6 +11,7 @@ import { WinLossScorer } from './win-loss-scorer';
 import { FinalScoreScorer } from './final-score-scorer';
 import { EloScorer } from './elo-scorer';
 import { CooperativeScorer } from './cooperative-scorer';
+import { TeamsScorer } from './teams-scorer';
 import { saveScore } from '@/lib/hooks/use-scores';
 import { completeSession } from '@/lib/hooks/use-session';
 import { generateId } from '@/lib/utils';
@@ -127,6 +128,19 @@ export function ScoringEngine({ session, game, players, existingScore }: Scoring
     router.push(`/session/${session.id}/complete`);
   }
 
+  async function handleTeamsComplete(teams: TeamDefinition[], winningTeamIndex: number) {
+    const scoreData: TeamsScore = {
+      id: generateId(),
+      type: 'teams',
+      sessionId: session.id,
+      teams,
+      winningTeamIndex,
+    };
+    await saveScore(scoreData);
+    await completeSession(session.id);
+    router.push(`/session/${session.id}/complete`);
+  }
+
   async function handleCooperativeComplete(levelReached: number, won: boolean) {
     const scoreData: CooperativeScore = {
       id: generateId(),
@@ -200,6 +214,16 @@ export function ScoringEngine({ session, game, players, existingScore }: Scoring
           game={game}
           players={players}
           onComplete={handleCooperativeComplete}
+        />
+      );
+
+    case ScoringType.TEAMS:
+      return (
+        <TeamsScorer
+          session={session}
+          game={game}
+          players={players}
+          onComplete={handleTeamsComplete}
         />
       );
 

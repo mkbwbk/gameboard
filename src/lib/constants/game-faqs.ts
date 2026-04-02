@@ -147,6 +147,29 @@ export const SCORING_TYPE_FAQS: Record<ScoringType, FaqEntry[]> = {
       a: '{name} supports {playerRange} players. Score Door tracks every player who participated in each session, so you can see which team compositions lead to the most wins.',
     },
   ],
+
+  [ScoringType.TEAMS]: [
+    {
+      q: 'How does team scoring work in {name}?',
+      a: '{name} uses team-based scoring where players are divided into teams. Each team competes as a unit, and Score Door records which team wins each session. Individual players are tracked within their teams for detailed stats.',
+    },
+    {
+      q: 'How do you set up teams for {name}?',
+      a: 'When starting a {name} session in Score Door, assign players to teams. You can create as many teams as the game requires and name them however you like. The app remembers team compositions for easy rematch setup.',
+    },
+    {
+      q: 'Can you track individual stats in team games of {name}?',
+      a: 'Yes. While {name} is scored at the team level, Score Door records which players were on each team. This means you can still see individual win rates and how different team compositions perform over time.',
+    },
+    {
+      q: 'How are {name} team standings calculated?',
+      a: 'Score Door tracks wins for each team and calculates win rates across all your {name} sessions. You can see which player combinations form the strongest teams and review your group\'s team game history.',
+    },
+    {
+      q: 'How many teams can play {name}?',
+      a: '{name} supports {playerRange} players split across teams. Score Door is flexible — create two large teams or several smaller ones depending on how you like to play.',
+    },
+  ],
 };
 
 /**

@@ -1,34 +1,40 @@
 import { db } from '@/lib/db/database';
-import type { ScoreData, WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloScore } from '@/lib/models/score';
+import type { ScoreData, WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloScore, TeamsScore } from '@/lib/models/score';
 import type { Game } from '@/lib/models/game';
 
-function getWinnerId(score: ScoreData, game: Game): string | null {
+function getWinnerIds(score: ScoreData, game: Game): string[] {
   switch (score.type) {
     case 'win_loss':
-      return (score as WinLossScore).winnerId;
+      return [(score as WinLossScore).winnerId];
     case 'final_score': {
       const s = score as FinalScoreResult;
       const sorted = Object.entries(s.scores).sort(([, a], [, b]) => b - a);
-      return sorted[0]?.[0] ?? null;
+      return sorted[0] ? [sorted[0][0]] : [];
     }
-    case 'race':
-      return (score as RaceScore).winnerId;
+    case 'race': {
+      const winnerId = (score as RaceScore).winnerId;
+      return winnerId ? [winnerId] : [];
+    }
     case 'round_based': {
       const s = score as RoundBasedScore;
       const sorted = Object.entries(s.finalTotals).sort(([, a], [, b]) =>
         game.config.lowestWins ? a - b : b - a
       );
-      return sorted[0]?.[0] ?? null;
+      return sorted[0] ? [sorted[0][0]] : [];
     }
     case 'elo': {
       const s = score as EloScore;
       const winner = Object.entries(s.playerResults).find(([, r]) => r.outcome === 'win');
-      return winner?.[0] ?? null;
+      return winner ? [winner[0]] : [];
+    }
+    case 'teams': {
+      const s = score as TeamsScore;
+      return s.teams[s.winningTeamIndex]?.playerIds ?? [];
     }
     case 'cooperative':
-      return null; // No individual winner
+      return []; // No individual winner
     default:
-      return null;
+      return [];
   }
 }
 
@@ -78,8 +84,8 @@ export async function computeWinRateOverTime(
     const score = scoreMap.get(session.id);
     const game = gameMap.get(session.gameId);
     if (!score || !game) continue;
-    const winnerId = getWinnerId(score, game);
-    results.push(winnerId === playerId);
+    const winners = getWinnerIds(score, game);
+    results.push(winners.includes(playerId));
   }
 
   if (results.length < 2) return [];
@@ -150,15 +156,15 @@ export async function computeStreaks(): Promise<PlayerStreak[]> {
     const score = scoreMap.get(session.id);
     const game = gameMap.get(session.gameId);
     if (!score || !game) continue;
-    const winnerId = getWinnerId(score, game);
-    if (!winnerId) continue; // skip cooperative
+    const winners = getWinnerIds(score, game);
+    if (winners.length === 0) continue; // skip cooperative
 
     for (const playerId of session.playerIds) {
       const s = streaks.get(playerId);
       if (!s) continue;
       s.total++;
 
-      if (playerId === winnerId) {
+      if (winners.includes(playerId)) {
         s.current = s.current > 0 ? s.current + 1 : 1;
         s.longestWin = Math.max(s.longestWin, s.current);
       } else {
@@ -197,7 +203,7 @@ export async function computeRivalries(): Promise<Rivalry[]> {
     const score = scoreMap.get(session.id);
     const game = gameMap.get(session.gameId);
     if (!score || !game) continue;
-    const winnerId = getWinnerId(score, game);
+    const winners = getWinnerIds(score, game);
 
     const ids = [...session.playerIds].sort();
     for (let i = 0; i < ids.length; i++) {
@@ -205,8 +211,8 @@ export async function computeRivalries(): Promise<Rivalry[]> {
         const key = `${ids[i]}:${ids[j]}`;
         const pair = pairs.get(key) ?? { p1: ids[i], p2: ids[j], games: 0, p1Wins: 0, p2Wins: 0 };
         pair.games++;
-        if (winnerId === ids[i]) pair.p1Wins++;
-        if (winnerId === ids[j]) pair.p2Wins++;
+        if (winners.includes(ids[i])) pair.p1Wins++;
+        if (winners.includes(ids[j])) pair.p2Wins++;
         pairs.set(key, pair);
       }
     }
@@ -245,13 +251,13 @@ export async function computePlayerWinCounts(): Promise<{ name: string; wins: nu
     const score = scoreMap.get(session.id);
     const game = gameMap.get(session.gameId);
     if (!score || !game) continue;
-    const winnerId = getWinnerId(score, game);
+    const winners = getWinnerIds(score, game);
 
     for (const playerId of session.playerIds) {
       const s = stats.get(playerId);
       if (!s) continue;
-      if (playerId === winnerId) s.wins++;
-      else if (winnerId) s.losses++; // Only count as loss if there was a winner (not cooperative)
+      if (winners.includes(playerId)) s.wins++;
+      else if (winners.length > 0) s.losses++; // Only count as loss if there was a winner (not cooperative)
     }
   }
 

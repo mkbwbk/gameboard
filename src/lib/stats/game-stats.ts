@@ -1,32 +1,38 @@
 import { db } from '@/lib/db/database';
-import type { ScoreData, WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloScore } from '@/lib/models/score';
+import type { ScoreData, WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloScore, TeamsScore } from '@/lib/models/score';
 import type { Game } from '@/lib/models/game';
 
-function getWinnerId(score: ScoreData, game: Game): string | null {
+function getWinnerIds(score: ScoreData, game: Game): string[] {
   switch (score.type) {
     case 'win_loss':
-      return (score as WinLossScore).winnerId;
+      return [(score as WinLossScore).winnerId];
     case 'final_score': {
       const s = score as FinalScoreResult;
       const sorted = Object.entries(s.scores).sort(([, a], [, b]) => b - a);
-      return sorted[0]?.[0] ?? null;
+      return sorted[0] ? [sorted[0][0]] : [];
     }
-    case 'race':
-      return (score as RaceScore).winnerId;
+    case 'race': {
+      const winnerId = (score as RaceScore).winnerId;
+      return winnerId ? [winnerId] : [];
+    }
     case 'round_based': {
       const s = score as RoundBasedScore;
       const sorted = Object.entries(s.finalTotals).sort(([, a], [, b]) =>
         game.config.lowestWins ? a - b : b - a
       );
-      return sorted[0]?.[0] ?? null;
+      return sorted[0] ? [sorted[0][0]] : [];
     }
     case 'elo': {
       const s = score as EloScore;
       const winner = Object.entries(s.playerResults).find(([, r]) => r.outcome === 'win');
-      return winner?.[0] ?? null;
+      return winner ? [winner[0]] : [];
+    }
+    case 'teams': {
+      const s = score as TeamsScore;
+      return s.teams[s.winningTeamIndex]?.playerIds ?? [];
     }
     default:
-      return null;
+      return [];
   }
 }
 
@@ -53,8 +59,8 @@ export async function computeGameWinDistribution(gameId: string): Promise<{
     const score = scoreMap.get(session.id);
     const game = gameMap.get(session.gameId);
     if (!score || !game) continue;
-    const winnerId = getWinnerId(score, game);
-    if (winnerId) {
+    const winners = getWinnerIds(score, game);
+    for (const winnerId of winners) {
       winCounts.set(winnerId, (winCounts.get(winnerId) ?? 0) + 1);
     }
   }

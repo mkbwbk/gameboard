@@ -5,6 +5,7 @@ export enum ScoringType {
   FINAL_SCORE = 'final_score',
   ELO = 'elo',
   COOPERATIVE = 'cooperative',
+  TEAMS = 'teams',
 }
 
 export enum GameCategory {

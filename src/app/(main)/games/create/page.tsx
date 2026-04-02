@@ -33,6 +33,7 @@ const scoringTypeDescriptions: Record<ScoringType, string> = {
   [ScoringType.FINAL_SCORE]: 'Each player enters their final score (e.g. Wingspan)',
   [ScoringType.ELO]: 'Win/loss/draw with ELO ratings (e.g. Chess)',
   [ScoringType.COOPERATIVE]: 'Cooperative — track the level your team reaches (e.g. The Mind)',
+  [ScoringType.TEAMS]: 'Teams compete — pick the winning team (e.g. Articulate)',
 };
 
 export default function CreateGamePage() {
@@ -130,6 +131,7 @@ export default function CreateGamePage() {
               <SelectItem value={ScoringType.ROUND_BASED}>Round-Based</SelectItem>
               <SelectItem value={ScoringType.RACE}>Race (First to X)</SelectItem>
               <SelectItem value={ScoringType.COOPERATIVE}>Cooperative</SelectItem>
+              <SelectItem value={ScoringType.TEAMS}>Teams / Doubles</SelectItem>
               <SelectItem value={ScoringType.ELO}>ELO Rated</SelectItem>
             </SelectContent>
           </Select>

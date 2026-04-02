@@ -16,7 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 import type { Player } from '@/lib/models/player';
-import type { WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloScore, CooperativeScore } from '@/lib/models/score';
+import type { WinLossScore, FinalScoreResult, RaceScore, RoundBasedScore, EloScore, CooperativeScore, TeamsScore } from '@/lib/models/score';
 
 export default function SessionCompletePage({ params }: { params: Promise<{ sessionId: string }> }) {
   const { sessionId } = use(params);
@@ -184,6 +184,49 @@ export default function SessionCompletePage({ params }: { params: Promise<{ sess
                     <PlayerAvatar key={p.id} emoji={p.avatarEmoji} color={p.avatarColor} size="sm" />
                   ))}
                 </div>
+              </div>
+            );
+          })()}
+
+          {score.type === 'teams' && (() => {
+            const s = score as TeamsScore;
+            const winningTeam = s.teams[s.winningTeamIndex];
+            const losingTeams = s.teams.filter((_, i) => i !== s.winningTeamIndex);
+            return (
+              <div className="space-y-4">
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground">Winner</p>
+                  <p className="font-bold text-lg mt-1">{winningTeam.name} 🏆</p>
+                  <div className="flex items-center justify-center gap-3 mt-2">
+                    {winningTeam.playerIds.map((pid) => {
+                      const player = getPlayer(pid);
+                      if (!player) return null;
+                      return (
+                        <div key={pid} className="flex flex-col items-center gap-1">
+                          <PlayerAvatar emoji={player.avatarEmoji} color={player.avatarColor} />
+                          <span className="text-xs font-medium">{player.name}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                {losingTeams.map((team, i) => (
+                  <div key={i} className="text-center">
+                    <p className="text-sm text-muted-foreground">{team.name}</p>
+                    <div className="flex items-center justify-center gap-3 mt-1">
+                      {team.playerIds.map((pid) => {
+                        const player = getPlayer(pid);
+                        if (!player) return null;
+                        return (
+                          <div key={pid} className="flex flex-col items-center gap-1">
+                            <PlayerAvatar emoji={player.avatarEmoji} color={player.avatarColor} size="sm" />
+                            <span className="text-xs">{player.name}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
             );
           })()}

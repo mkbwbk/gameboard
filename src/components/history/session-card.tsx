@@ -3,7 +3,7 @@
 import type { GameSession } from '@/lib/models/session';
 import type { Game } from '@/lib/models/game';
 import type { Player } from '@/lib/models/player';
-import type { ScoreData, WinLossScore, FinalScoreResult, RaceScore, EloScore, RoundBasedScore, CooperativeScore } from '@/lib/models/score';
+import type { ScoreData, WinLossScore, FinalScoreResult, RaceScore, EloScore, RoundBasedScore, CooperativeScore, TeamsScore } from '@/lib/models/score';
 import { PlayerAvatar } from '@/components/players/player-avatar';
 import { Badge } from '@/components/ui/badge';
 import { formatRelativeTime } from '@/lib/utils';
@@ -55,6 +55,11 @@ function getResultSummary(score: ScoreData, players: Player[], game: Game): stri
     case 'cooperative': {
       const s = score as CooperativeScore;
       return `Level ${s.levelReached} ${s.won ? '(Won!)' : '(Failed)'}`;
+    }
+    case 'teams': {
+      const s = score as TeamsScore;
+      const winningTeam = s.teams[s.winningTeamIndex];
+      return `${winningTeam?.name ?? 'Team'} won`;
     }
     default:
       return '';

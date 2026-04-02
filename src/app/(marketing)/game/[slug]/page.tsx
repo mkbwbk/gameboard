@@ -72,6 +72,13 @@ const scoringTypeInfo: Record<
     description: 'Players work together as a team. Everyone wins or loses together based on the game outcome.',
     howItWorks: 'Record whether the team won or lost each session. Score Door tracks your group\'s win rate and performance history for cooperative games.',
   },
+  [ScoringType.TEAMS]: {
+    label: 'Team-Based',
+    icon: Users,
+    color: 'text-cyan-400 bg-cyan-400/10 border-cyan-400/20',
+    description: 'Divide players into teams and compete head-to-head. The winning team takes the glory.',
+    howItWorks: 'Create teams, assign players, and record which team wins each session. Score Door tracks team performance and individual contributions across team games.',
+  },
 };
 
 const categoryLabels: Record<GameCategory, string> = {
