@@ -181,9 +181,9 @@ Improvements made to the marketing/sales site for SEO and UX.
 
 ### Code Tasks
 
-1. **Verify & Fix YouTube Video IDs** — IDs in `src/lib/constants/games.ts` are best-effort. Verify each `youtubeVideoId` loads a relevant tutorial. Search YouTube for "how to play {game name}" to find correct IDs.
+1. ~~**Verify & Fix YouTube Video IDs**~~ — ✅ DONE. All 44 YouTube IDs verified correct via oEmbed API (April 2025). **Flip 7** has no YouTube ID — needs manual lookup for "how to play Flip 7 card game".
 
-2. **Verify & Fix Amazon ASINs** — ASINs in `src/lib/constants/games.ts` are best-effort. Verify each `amazonUrl` loads the correct product. The `amazonUrl(asin)` helper builds `https://www.amazon.com/dp/{ASIN}?tag=scoredoor-20`.
+2. **Verify & Fix Amazon ASINs** — 12 of 41 ASINs verified correct via WebFetch (Patchwork, Catan, Carcassonne, Terraforming Mars, Scythe, Cascadia, Exploding Kittens, Codenames, Monopoly Deal, UNO, Forbidden Island, Gloomhaven). Remaining 29 need manual spot-check (Amazon rate-limited automated verification). **Dominion (B001JQY6P4) may be broken (404)** — needs new ASIN. **Backgammon (B0BWVMRQV3) also flagged as possible 404** — verify manually.
 
 3. **Update Amazon Affiliate Tag** — Currently placeholder `scoredoor-20` in `src/lib/constants/games.ts` line 3. Replace with real Amazon Associates tag when registered.
 
@@ -191,7 +191,9 @@ Improvements made to the marketing/sales site for SEO and UX.
 
 5. ~~**Review Service Worker**~~ — ✅ DONE. SW updated to v2, pre-caches only app routes, offline fallback to `/dashboard`.
 
-6. **Fix Pre-Existing Lint Warnings** — Run `npm run lint`. There are pre-existing warnings (setState in effects, unused vars, unescaped entities). Not blocking but should be cleaned up.
+6. ~~**Fix Pre-Existing Lint Warnings**~~ — ✅ DONE. All 16k+ lint errors were from `.claude/worktrees/` build artifacts being linted. Added `.claude/**` to eslint globalIgnores. App source code is lint-clean.
+
+7. ~~**Fix Build (TEAMS scoring type)**~~ — ✅ DONE. Added `ScoringType.TEAMS` to marketing game page `scoringTypeInfo` Record and `SCORING_TYPE_FAQS` in `game-faqs.ts`.
 
 ---
 
