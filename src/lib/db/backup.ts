@@ -29,6 +29,19 @@ export async function exportData(): Promise<string> {
   return JSON.stringify(backup, null, 2);
 }
 
+// Rehydrate ISO date strings back into Date objects after JSON.parse
+function rehydrateDates<T>(records: T[], dateFields: string[]): T[] {
+  return records.map((record) => {
+    const obj = { ...record } as Record<string, unknown>;
+    for (const field of dateFields) {
+      if (typeof obj[field] === 'string') {
+        obj[field] = new Date(obj[field] as string);
+      }
+    }
+    return obj as T;
+  });
+}
+
 export async function importData(jsonString: string): Promise<{ success: boolean; message: string }> {
   try {
     const data = JSON.parse(jsonString) as BackupData;
@@ -36,6 +49,11 @@ export async function importData(jsonString: string): Promise<{ success: boolean
     if (!data.version || !data.players || !data.games || !data.sessions || !data.scores) {
       return { success: false, message: 'Invalid backup file format.' };
     }
+
+    // Rehydrate date fields that JSON.stringify converted to strings
+    const players = rehydrateDates(data.players, ['createdAt']);
+    const games = rehydrateDates(data.games, ['createdAt']);
+    const sessions = rehydrateDates(data.sessions, ['startedAt', 'completedAt', 'createdAt']);
 
     // Clear existing data
     await db.transaction('rw', [db.players, db.games, db.sessions, db.scores], async () => {
@@ -45,9 +63,9 @@ export async function importData(jsonString: string): Promise<{ success: boolean
       await db.scores.clear();
 
       // Import new data
-      if (data.players.length) await db.players.bulkAdd(data.players as never[]);
-      if (data.games.length) await db.games.bulkAdd(data.games as never[]);
-      if (data.sessions.length) await db.sessions.bulkAdd(data.sessions as never[]);
+      if (players.length) await db.players.bulkAdd(players as never[]);
+      if (games.length) await db.games.bulkAdd(games as never[]);
+      if (sessions.length) await db.sessions.bulkAdd(sessions as never[]);
       if (data.scores.length) await db.scores.bulkAdd(data.scores as never[]);
     });
 

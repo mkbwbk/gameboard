@@ -1,0 +1,525 @@
+{
+  "version": 1,
+  "exportedAt": "2026-04-02T12:00:00.000Z",
+  "players": [
+    { "id": "p1", "name": "Mike", "avatarEmoji": "🔥", "avatarColor": "#6366f1", "createdAt": "2026-01-15T10:00:00.000Z" },
+    { "id": "p2", "name": "Sarah", "avatarEmoji": "⭐", "avatarColor": "#ec4899", "createdAt": "2026-01-15T10:01:00.000Z" },
+    { "id": "p3", "name": "Tom", "avatarEmoji": "🦊", "avatarColor": "#22c55e", "createdAt": "2026-01-15T10:02:00.000Z" },
+    { "id": "p4", "name": "Jess", "avatarEmoji": "💎", "avatarColor": "#8b5cf6", "createdAt": "2026-01-20T14:00:00.000Z" },
+    { "id": "p5", "name": "Dan", "avatarEmoji": "🐺", "avatarColor": "#ef4444", "createdAt": "2026-02-01T09:00:00.000Z" },
+    { "id": "p6", "name": "Lucy", "avatarEmoji": "🦄", "avatarColor": "#06b6d4", "createdAt": "2026-02-10T11:00:00.000Z" }
+  ],
+  "games": [
+    {
+      "id": "g-catan", "name": "Catan", "scoringType": "race", "icon": "🏝️",
+      "config": { "minPlayers": 3, "maxPlayers": 4, "targetScore": 10 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": true, "category": "strategy",
+      "youtubeVideoId": "8Yj0Y3GKE40", "amazonUrl": "https://www.amazon.com/dp/B00U26V4VQ?tag=scoredoor-20",
+      "playTime": "60–120 min"
+    },
+    {
+      "id": "g-wingspan", "name": "Wingspan", "scoringType": "final_score", "icon": "🦅",
+      "config": { "minPlayers": 1, "maxPlayers": 5 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": true, "category": "strategy",
+      "youtubeVideoId": "lgDgcLI2B0U", "amazonUrl": "https://www.amazon.com/dp/B07YQ1XHJR?tag=scoredoor-20",
+      "playTime": "40–70 min"
+    },
+    {
+      "id": "g-chess", "name": "Chess", "scoringType": "elo", "icon": "♟️",
+      "config": { "minPlayers": 2, "maxPlayers": 2, "allowDraw": true },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": false, "category": "classic",
+      "youtubeVideoId": "NAIQyoPcjNM", "amazonUrl": "https://www.amazon.com/dp/B07B6GF9GY?tag=scoredoor-20",
+      "playTime": "30–60 min"
+    },
+    {
+      "id": "g-uno", "name": "UNO", "scoringType": "win_loss", "icon": "🟥",
+      "config": { "minPlayers": 2, "maxPlayers": 10 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": true, "category": "family",
+      "youtubeVideoId": "sWoSZmHsCls", "amazonUrl": "https://www.amazon.com/dp/B005I5M2F8?tag=scoredoor-20",
+      "playTime": "30 min"
+    },
+    {
+      "id": "g-scrabble", "name": "Scrabble", "scoringType": "final_score", "icon": "🔤",
+      "config": { "minPlayers": 2, "maxPlayers": 4 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": false, "category": "classic",
+      "youtubeVideoId": "swlg3vQXboE", "amazonUrl": "https://www.amazon.com/dp/B00IL5PH5C?tag=scoredoor-20",
+      "playTime": "60–90 min"
+    },
+    {
+      "id": "g-pandemic", "name": "Pandemic", "scoringType": "cooperative", "icon": "🦠",
+      "config": { "minPlayers": 2, "maxPlayers": 4 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": true, "category": "cooperative",
+      "youtubeVideoId": "ojkScPkdgsk", "amazonUrl": "https://www.amazon.com/dp/B00A2HD40E?tag=scoredoor-20",
+      "playTime": "45 min"
+    },
+    {
+      "id": "g-darts", "name": "Darts", "scoringType": "round_based", "icon": "🎯",
+      "config": { "minPlayers": 2, "maxPlayers": 8, "lowestWins": true, "targetScore": 501 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": false, "category": "classic",
+      "youtubeVideoId": "hjmC0b881q0", "amazonUrl": "https://www.amazon.com/dp/B08CVS6TZ1?tag=scoredoor-20",
+      "playTime": "20–30 min"
+    },
+    {
+      "id": "g-ticket", "name": "Ticket to Ride", "scoringType": "final_score", "icon": "🚂",
+      "config": { "minPlayers": 2, "maxPlayers": 5 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": false, "category": "strategy",
+      "youtubeVideoId": "4JhFhyvGdik", "amazonUrl": "https://www.amazon.com/dp/B0002TV2LU?tag=scoredoor-20",
+      "playTime": "30–60 min"
+    },
+    {
+      "id": "g-codenames", "name": "Codenames", "scoringType": "win_loss", "icon": "🕵️",
+      "config": { "minPlayers": 4, "maxPlayers": 8 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": false, "category": "party",
+      "youtubeVideoId": "J8RWBooJivg", "amazonUrl": "https://www.amazon.com/dp/B014Q1XX9S?tag=scoredoor-20",
+      "playTime": "15 min"
+    },
+    {
+      "id": "g-azul", "name": "Azul", "scoringType": "final_score", "icon": "🔷",
+      "config": { "minPlayers": 2, "maxPlayers": 4 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": false, "category": "strategy",
+      "youtubeVideoId": "csJL-78NEPQ", "amazonUrl": "https://www.amazon.com/dp/B077MZ2MPH?tag=scoredoor-20",
+      "playTime": "30–45 min"
+    },
+    {
+      "id": "g-exploding", "name": "Exploding Kittens", "scoringType": "win_loss", "icon": "🐱",
+      "config": { "minPlayers": 2, "maxPlayers": 5 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": false, "category": "party",
+      "youtubeVideoId": "kAkRKuv5Rts", "amazonUrl": "https://www.amazon.com/dp/B010TQY7A8?tag=scoredoor-20",
+      "playTime": "15 min"
+    },
+    {
+      "id": "g-splendor", "name": "Splendor", "scoringType": "race", "icon": "💎",
+      "config": { "minPlayers": 2, "maxPlayers": 4, "targetScore": 15 },
+      "isCustom": false, "createdAt": "2026-01-15T10:00:00.000Z",
+      "isFavourite": false, "category": "strategy",
+      "youtubeVideoId": "rue8-jvbc9I", "amazonUrl": "https://www.amazon.com/dp/B00IZEUFIA?tag=scoredoor-20",
+      "playTime": "30 min"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "s01", "gameId": "g-catan", "playerIds": ["p1", "p2", "p3"],
+      "status": "completed", "startedAt": "2026-01-20T19:00:00.000Z", "completedAt": "2026-01-20T20:30:00.000Z"
+    },
+    {
+      "id": "s02", "gameId": "g-catan", "playerIds": ["p1", "p2", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-01-27T19:00:00.000Z", "completedAt": "2026-01-27T21:00:00.000Z"
+    },
+    {
+      "id": "s03", "gameId": "g-catan", "playerIds": ["p1", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-02-10T19:00:00.000Z", "completedAt": "2026-02-10T20:45:00.000Z"
+    },
+    {
+      "id": "s04", "gameId": "g-catan", "playerIds": ["p1", "p2", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-03-01T19:00:00.000Z", "completedAt": "2026-03-01T21:15:00.000Z"
+    },
+    {
+      "id": "s05", "gameId": "g-catan", "playerIds": ["p2", "p3", "p5"],
+      "status": "completed", "startedAt": "2026-03-15T19:00:00.000Z", "completedAt": "2026-03-15T20:30:00.000Z"
+    },
+    {
+      "id": "s10", "gameId": "g-wingspan", "playerIds": ["p1", "p2", "p4"],
+      "status": "completed", "startedAt": "2026-01-22T14:00:00.000Z", "completedAt": "2026-01-22T15:10:00.000Z"
+    },
+    {
+      "id": "s11", "gameId": "g-wingspan", "playerIds": ["p1", "p2", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-02-05T14:00:00.000Z", "completedAt": "2026-02-05T15:20:00.000Z"
+    },
+    {
+      "id": "s12", "gameId": "g-wingspan", "playerIds": ["p2", "p4", "p6"],
+      "status": "completed", "startedAt": "2026-02-19T14:00:00.000Z", "completedAt": "2026-02-19T15:05:00.000Z"
+    },
+    {
+      "id": "s13", "gameId": "g-wingspan", "playerIds": ["p1", "p2", "p3"],
+      "status": "completed", "startedAt": "2026-03-12T14:00:00.000Z", "completedAt": "2026-03-12T15:15:00.000Z"
+    },
+    {
+      "id": "s20", "gameId": "g-chess", "playerIds": ["p1", "p3"],
+      "status": "completed", "startedAt": "2026-01-18T20:00:00.000Z", "completedAt": "2026-01-18T20:45:00.000Z"
+    },
+    {
+      "id": "s21", "gameId": "g-chess", "playerIds": ["p1", "p3"],
+      "status": "completed", "startedAt": "2026-01-25T20:00:00.000Z", "completedAt": "2026-01-25T20:30:00.000Z"
+    },
+    {
+      "id": "s22", "gameId": "g-chess", "playerIds": ["p1", "p5"],
+      "status": "completed", "startedAt": "2026-02-08T20:00:00.000Z", "completedAt": "2026-02-08T21:00:00.000Z"
+    },
+    {
+      "id": "s23", "gameId": "g-chess", "playerIds": ["p3", "p5"],
+      "status": "completed", "startedAt": "2026-02-15T20:00:00.000Z", "completedAt": "2026-02-15T20:50:00.000Z"
+    },
+    {
+      "id": "s24", "gameId": "g-chess", "playerIds": ["p1", "p3"],
+      "status": "completed", "startedAt": "2026-03-05T20:00:00.000Z", "completedAt": "2026-03-05T20:40:00.000Z"
+    },
+    {
+      "id": "s25", "gameId": "g-chess", "playerIds": ["p1", "p5"],
+      "status": "completed", "startedAt": "2026-03-20T20:00:00.000Z", "completedAt": "2026-03-20T21:10:00.000Z"
+    },
+    {
+      "id": "s30", "gameId": "g-uno", "playerIds": ["p1", "p2", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-01-21T21:00:00.000Z", "completedAt": "2026-01-21T21:25:00.000Z"
+    },
+    {
+      "id": "s31", "gameId": "g-uno", "playerIds": ["p1", "p2", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-01-21T21:30:00.000Z", "completedAt": "2026-01-21T21:50:00.000Z"
+    },
+    {
+      "id": "s32", "gameId": "g-uno", "playerIds": ["p1", "p2", "p5", "p6"],
+      "status": "completed", "startedAt": "2026-02-14T21:00:00.000Z", "completedAt": "2026-02-14T21:30:00.000Z"
+    },
+    {
+      "id": "s33", "gameId": "g-uno", "playerIds": ["p2", "p3", "p4", "p5"],
+      "status": "completed", "startedAt": "2026-02-28T21:00:00.000Z", "completedAt": "2026-02-28T21:20:00.000Z"
+    },
+    {
+      "id": "s34", "gameId": "g-uno", "playerIds": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "status": "completed", "startedAt": "2026-03-14T21:00:00.000Z", "completedAt": "2026-03-14T21:35:00.000Z"
+    },
+    {
+      "id": "s35", "gameId": "g-uno", "playerIds": ["p1", "p3", "p6"],
+      "status": "completed", "startedAt": "2026-03-28T21:00:00.000Z", "completedAt": "2026-03-28T21:20:00.000Z"
+    },
+    {
+      "id": "s40", "gameId": "g-scrabble", "playerIds": ["p1", "p2"],
+      "status": "completed", "startedAt": "2026-02-02T15:00:00.000Z", "completedAt": "2026-02-02T16:30:00.000Z"
+    },
+    {
+      "id": "s41", "gameId": "g-scrabble", "playerIds": ["p1", "p2", "p4"],
+      "status": "completed", "startedAt": "2026-02-16T15:00:00.000Z", "completedAt": "2026-02-16T16:45:00.000Z"
+    },
+    {
+      "id": "s42", "gameId": "g-scrabble", "playerIds": ["p2", "p4"],
+      "status": "completed", "startedAt": "2026-03-09T15:00:00.000Z", "completedAt": "2026-03-09T16:20:00.000Z"
+    },
+    {
+      "id": "s50", "gameId": "g-pandemic", "playerIds": ["p1", "p2", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-01-26T14:00:00.000Z", "completedAt": "2026-01-26T14:50:00.000Z"
+    },
+    {
+      "id": "s51", "gameId": "g-pandemic", "playerIds": ["p1", "p2", "p3"],
+      "status": "completed", "startedAt": "2026-02-09T14:00:00.000Z", "completedAt": "2026-02-09T14:55:00.000Z"
+    },
+    {
+      "id": "s52", "gameId": "g-pandemic", "playerIds": ["p1", "p2", "p4", "p6"],
+      "status": "completed", "startedAt": "2026-02-23T14:00:00.000Z", "completedAt": "2026-02-23T14:40:00.000Z"
+    },
+    {
+      "id": "s53", "gameId": "g-pandemic", "playerIds": ["p1", "p3", "p5"],
+      "status": "completed", "startedAt": "2026-03-16T14:00:00.000Z", "completedAt": "2026-03-16T14:45:00.000Z"
+    },
+    {
+      "id": "s60", "gameId": "g-darts", "playerIds": ["p1", "p5"],
+      "status": "completed", "startedAt": "2026-02-07T20:00:00.000Z", "completedAt": "2026-02-07T20:30:00.000Z"
+    },
+    {
+      "id": "s61", "gameId": "g-darts", "playerIds": ["p1", "p3", "p5"],
+      "status": "completed", "startedAt": "2026-02-21T20:00:00.000Z", "completedAt": "2026-02-21T20:45:00.000Z"
+    },
+    {
+      "id": "s62", "gameId": "g-darts", "playerIds": ["p1", "p5"],
+      "status": "completed", "startedAt": "2026-03-14T20:00:00.000Z", "completedAt": "2026-03-14T20:35:00.000Z"
+    },
+    {
+      "id": "s70", "gameId": "g-ticket", "playerIds": ["p1", "p2", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-02-01T14:00:00.000Z", "completedAt": "2026-02-01T15:00:00.000Z"
+    },
+    {
+      "id": "s71", "gameId": "g-ticket", "playerIds": ["p2", "p3", "p6"],
+      "status": "completed", "startedAt": "2026-03-08T14:00:00.000Z", "completedAt": "2026-03-08T15:10:00.000Z"
+    },
+    {
+      "id": "s80", "gameId": "g-codenames", "playerIds": ["p1", "p2", "p3", "p4"],
+      "status": "completed", "startedAt": "2026-02-14T22:00:00.000Z", "completedAt": "2026-02-14T22:20:00.000Z"
+    },
+    {
+      "id": "s81", "gameId": "g-codenames", "playerIds": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "status": "completed", "startedAt": "2026-03-07T22:00:00.000Z", "completedAt": "2026-03-07T22:25:00.000Z"
+    },
+    {
+      "id": "s82", "gameId": "g-codenames", "playerIds": ["p1", "p2", "p5", "p6"],
+      "status": "completed", "startedAt": "2026-03-21T22:00:00.000Z", "completedAt": "2026-03-21T22:15:00.000Z"
+    },
+    {
+      "id": "s90", "gameId": "g-azul", "playerIds": ["p1", "p4"],
+      "status": "completed", "startedAt": "2026-02-12T16:00:00.000Z", "completedAt": "2026-02-12T16:40:00.000Z"
+    },
+    {
+      "id": "s91", "gameId": "g-azul", "playerIds": ["p1", "p2", "p4"],
+      "status": "completed", "startedAt": "2026-03-02T16:00:00.000Z", "completedAt": "2026-03-02T16:45:00.000Z"
+    },
+    {
+      "id": "s100", "gameId": "g-exploding", "playerIds": ["p1", "p2", "p3", "p4", "p5"],
+      "status": "completed", "startedAt": "2026-02-14T23:00:00.000Z", "completedAt": "2026-02-14T23:15:00.000Z"
+    },
+    {
+      "id": "s101", "gameId": "g-exploding", "playerIds": ["p1", "p3", "p5"],
+      "status": "completed", "startedAt": "2026-03-07T23:00:00.000Z", "completedAt": "2026-03-07T23:12:00.000Z"
+    },
+    {
+      "id": "s102", "gameId": "g-exploding", "playerIds": ["p2", "p4", "p6"],
+      "status": "completed", "startedAt": "2026-03-21T23:00:00.000Z", "completedAt": "2026-03-21T23:10:00.000Z"
+    },
+    {
+      "id": "s110", "gameId": "g-splendor", "playerIds": ["p1", "p2", "p3"],
+      "status": "completed", "startedAt": "2026-02-22T18:00:00.000Z", "completedAt": "2026-02-22T18:35:00.000Z"
+    },
+    {
+      "id": "s111", "gameId": "g-splendor", "playerIds": ["p1", "p4"],
+      "status": "completed", "startedAt": "2026-03-15T18:00:00.000Z", "completedAt": "2026-03-15T18:30:00.000Z"
+    }
+  ],
+  "scores": [
+    {
+      "id": "sc01", "type": "race", "sessionId": "s01",
+      "rounds": [
+        { "roundNumber": 1, "winnerId": "p1", "points": 1 },
+        { "roundNumber": 2, "winnerId": "p2", "points": 1 },
+        { "roundNumber": 3, "winnerId": "p1", "points": 1 }
+      ],
+      "scores": { "p1": 10, "p2": 8, "p3": 6 },
+      "winnerId": "p1", "targetScore": 10
+    },
+    {
+      "id": "sc02", "type": "race", "sessionId": "s02",
+      "rounds": [],
+      "scores": { "p1": 8, "p2": 10, "p3": 7, "p4": 5 },
+      "winnerId": "p2", "targetScore": 10
+    },
+    {
+      "id": "sc03", "type": "race", "sessionId": "s03",
+      "rounds": [],
+      "scores": { "p1": 7, "p3": 10, "p4": 9 },
+      "winnerId": "p3", "targetScore": 10
+    },
+    {
+      "id": "sc04", "type": "race", "sessionId": "s04",
+      "rounds": [],
+      "scores": { "p1": 10, "p2": 6, "p3": 8, "p4": 9 },
+      "winnerId": "p1", "targetScore": 10
+    },
+    {
+      "id": "sc05", "type": "race", "sessionId": "s05",
+      "rounds": [],
+      "scores": { "p2": 9, "p3": 10, "p5": 7 },
+      "winnerId": "p3", "targetScore": 10
+    },
+    {
+      "id": "sc10", "type": "final_score", "sessionId": "s10",
+      "scores": { "p1": 87, "p2": 102, "p4": 74 }
+    },
+    {
+      "id": "sc11", "type": "final_score", "sessionId": "s11",
+      "scores": { "p1": 95, "p2": 88, "p3": 72, "p4": 110 }
+    },
+    {
+      "id": "sc12", "type": "final_score", "sessionId": "s12",
+      "scores": { "p2": 91, "p4": 105, "p6": 83 }
+    },
+    {
+      "id": "sc13", "type": "final_score", "sessionId": "s13",
+      "scores": { "p1": 112, "p2": 98, "p3": 85 }
+    },
+    {
+      "id": "sc20", "type": "elo", "sessionId": "s20",
+      "result": "player1_win",
+      "playerResults": {
+        "p1": { "outcome": "win", "ratingBefore": 1200, "ratingAfter": 1216 },
+        "p3": { "outcome": "loss", "ratingBefore": 1200, "ratingAfter": 1184 }
+      }
+    },
+    {
+      "id": "sc21", "type": "elo", "sessionId": "s21",
+      "result": "player2_win",
+      "playerResults": {
+        "p1": { "outcome": "loss", "ratingBefore": 1216, "ratingAfter": 1201 },
+        "p3": { "outcome": "win", "ratingBefore": 1184, "ratingAfter": 1199 }
+      }
+    },
+    {
+      "id": "sc22", "type": "elo", "sessionId": "s22",
+      "result": "player1_win",
+      "playerResults": {
+        "p1": { "outcome": "win", "ratingBefore": 1201, "ratingAfter": 1217 },
+        "p5": { "outcome": "loss", "ratingBefore": 1200, "ratingAfter": 1184 }
+      }
+    },
+    {
+      "id": "sc23", "type": "elo", "sessionId": "s23",
+      "result": "player1_win",
+      "playerResults": {
+        "p3": { "outcome": "win", "ratingBefore": 1199, "ratingAfter": 1215 },
+        "p5": { "outcome": "loss", "ratingBefore": 1184, "ratingAfter": 1168 }
+      }
+    },
+    {
+      "id": "sc24", "type": "elo", "sessionId": "s24",
+      "result": "draw",
+      "playerResults": {
+        "p1": { "outcome": "draw", "ratingBefore": 1217, "ratingAfter": 1216 },
+        "p3": { "outcome": "draw", "ratingBefore": 1215, "ratingAfter": 1216 }
+      }
+    },
+    {
+      "id": "sc25", "type": "elo", "sessionId": "s25",
+      "result": "player1_win",
+      "playerResults": {
+        "p1": { "outcome": "win", "ratingBefore": 1216, "ratingAfter": 1228 },
+        "p5": { "outcome": "loss", "ratingBefore": 1168, "ratingAfter": 1156 }
+      }
+    },
+    {
+      "id": "sc30", "type": "win_loss", "sessionId": "s30",
+      "winnerId": "p2", "placements": ["p2", "p1", "p3", "p4"]
+    },
+    {
+      "id": "sc31", "type": "win_loss", "sessionId": "s31",
+      "winnerId": "p4", "placements": ["p4", "p2", "p1", "p3"]
+    },
+    {
+      "id": "sc32", "type": "win_loss", "sessionId": "s32",
+      "winnerId": "p1", "placements": ["p1", "p6", "p2", "p5"]
+    },
+    {
+      "id": "sc33", "type": "win_loss", "sessionId": "s33",
+      "winnerId": "p2", "placements": ["p2", "p5", "p3", "p4"]
+    },
+    {
+      "id": "sc34", "type": "win_loss", "sessionId": "s34",
+      "winnerId": "p6", "placements": ["p6", "p2", "p1", "p4", "p3", "p5"]
+    },
+    {
+      "id": "sc35", "type": "win_loss", "sessionId": "s35",
+      "winnerId": "p1", "placements": ["p1", "p3", "p6"]
+    },
+    {
+      "id": "sc40", "type": "final_score", "sessionId": "s40",
+      "scores": { "p1": 287, "p2": 312 }
+    },
+    {
+      "id": "sc41", "type": "final_score", "sessionId": "s41",
+      "scores": { "p1": 265, "p2": 301, "p4": 278 }
+    },
+    {
+      "id": "sc42", "type": "final_score", "sessionId": "s42",
+      "scores": { "p2": 295, "p4": 310 }
+    },
+    {
+      "id": "sc50", "type": "cooperative", "sessionId": "s50",
+      "levelReached": 1, "won": true, "notes": "Cured all four diseases with 2 cards left"
+    },
+    {
+      "id": "sc51", "type": "cooperative", "sessionId": "s51",
+      "levelReached": 1, "won": false, "notes": "Outbreaks got us in round 8"
+    },
+    {
+      "id": "sc52", "type": "cooperative", "sessionId": "s52",
+      "levelReached": 1, "won": true
+    },
+    {
+      "id": "sc53", "type": "cooperative", "sessionId": "s53",
+      "levelReached": 1, "won": false, "notes": "Ran out of player cards"
+    },
+    {
+      "id": "sc60", "type": "round_based", "sessionId": "s60",
+      "rounds": [
+        { "roundNumber": 1, "scores": { "p1": 60, "p5": 45 } },
+        { "roundNumber": 2, "scores": { "p1": 85, "p5": 100 } },
+        { "roundNumber": 3, "scores": { "p1": 57, "p5": 41 } },
+        { "roundNumber": 4, "scores": { "p1": 100, "p5": 78 } },
+        { "roundNumber": 5, "scores": { "p1": 45, "p5": 60 } },
+        { "roundNumber": 6, "scores": { "p1": 80, "p5": 95 } },
+        { "roundNumber": 7, "scores": { "p1": 74, "p5": 82 } }
+      ],
+      "finalTotals": { "p1": 501, "p5": 501 }
+    },
+    {
+      "id": "sc61", "type": "round_based", "sessionId": "s61",
+      "rounds": [
+        { "roundNumber": 1, "scores": { "p1": 80, "p3": 60, "p5": 45 } },
+        { "roundNumber": 2, "scores": { "p1": 55, "p3": 100, "p5": 85 } },
+        { "roundNumber": 3, "scores": { "p1": 100, "p3": 41, "p5": 60 } },
+        { "roundNumber": 4, "scores": { "p1": 66, "p3": 80, "p5": 95 } },
+        { "roundNumber": 5, "scores": { "p1": 95, "p3": 85, "p5": 74 } },
+        { "roundNumber": 6, "scores": { "p1": 105, "p3": 135, "p5": 142 } }
+      ],
+      "finalTotals": { "p1": 501, "p3": 501, "p5": 501 }
+    },
+    {
+      "id": "sc62", "type": "round_based", "sessionId": "s62",
+      "rounds": [
+        { "roundNumber": 1, "scores": { "p1": 100, "p5": 60 } },
+        { "roundNumber": 2, "scores": { "p1": 85, "p5": 95 } },
+        { "roundNumber": 3, "scores": { "p1": 57, "p5": 80 } },
+        { "roundNumber": 4, "scores": { "p1": 78, "p5": 100 } },
+        { "roundNumber": 5, "scores": { "p1": 81, "p5": 66 } },
+        { "roundNumber": 6, "scores": { "p1": 100, "p5": 100 } }
+      ],
+      "finalTotals": { "p1": 501, "p5": 501 }
+    },
+    {
+      "id": "sc70", "type": "final_score", "sessionId": "s70",
+      "scores": { "p1": 127, "p2": 143, "p3": 98, "p4": 156 }
+    },
+    {
+      "id": "sc71", "type": "final_score", "sessionId": "s71",
+      "scores": { "p2": 134, "p3": 161, "p6": 119 }
+    },
+    {
+      "id": "sc80", "type": "win_loss", "sessionId": "s80",
+      "winnerId": "p1", "placements": ["p1", "p2", "p3", "p4"]
+    },
+    {
+      "id": "sc81", "type": "win_loss", "sessionId": "s81",
+      "winnerId": "p3", "placements": ["p3", "p5", "p1", "p6", "p2", "p4"]
+    },
+    {
+      "id": "sc82", "type": "win_loss", "sessionId": "s82",
+      "winnerId": "p5", "placements": ["p5", "p6", "p1", "p2"]
+    },
+    {
+      "id": "sc90", "type": "final_score", "sessionId": "s90",
+      "scores": { "p1": 68, "p4": 75 }
+    },
+    {
+      "id": "sc91", "type": "final_score", "sessionId": "s91",
+      "scores": { "p1": 82, "p2": 64, "p4": 71 }
+    },
+    {
+      "id": "sc100", "type": "win_loss", "sessionId": "s100",
+      "winnerId": "p3", "placements": ["p3", "p1", "p5", "p4", "p2"]
+    },
+    {
+      "id": "sc101", "type": "win_loss", "sessionId": "s101",
+      "winnerId": "p5", "placements": ["p5", "p1", "p3"]
+    },
+    {
+      "id": "sc102", "type": "win_loss", "sessionId": "s102",
+      "winnerId": "p2", "placements": ["p2", "p6", "p4"]
+    },
+    {
+      "id": "sc110", "type": "race", "sessionId": "s110",
+      "rounds": [],
+      "scores": { "p1": 15, "p2": 12, "p3": 11 },
+      "winnerId": "p1", "targetScore": 15
+    },
+    {
+      "id": "sc111", "type": "race", "sessionId": "s111",
+      "rounds": [],
+      "scores": { "p1": 13, "p4": 15 },
+      "winnerId": "p4", "targetScore": 15
+    }
+  ]
+}
