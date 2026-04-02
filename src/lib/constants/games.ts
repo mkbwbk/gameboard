@@ -39,7 +39,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     config: { minPlayers: 2, maxPlayers: 2, targetScore: 3 },
     category: GameCategory.CLASSIC,
     youtubeVideoId: 'xXE5AwzNQ2s',
-    amazonUrl: amazonUrl('B0BWVMRQV3'),
+    amazonUrl: amazonUrl('B0C1TYYW82'),
     playTime: '30 min',
   },
   {
@@ -203,7 +203,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     config: { minPlayers: 2, maxPlayers: 4 },
     category: GameCategory.STRATEGY,
     youtubeVideoId: '5jNGpgdMums',
-    amazonUrl: amazonUrl('B001JQY6P4'),
+    amazonUrl: amazonUrl('B01LYLIS2U'),
     playTime: '30 min',
   },
   {
@@ -394,6 +394,7 @@ export const DEFAULT_GAMES: DefaultGameDef[] = [
     icon: '🃏',
     config: { minPlayers: 2, maxPlayers: 8, lowestWins: false, targetScore: 200 },
     category: GameCategory.CARD_GAMES,
+    youtubeVideoId: 'DR0ANDtozxs',
     playTime: '15 min',
   },
   {
